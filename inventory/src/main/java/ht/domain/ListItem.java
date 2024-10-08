@@ -11,7 +11,6 @@ import lombok.Data;
 @Table(name = "ListItem_table")
 @Data
 public class ListItem {
-
     @Id
     //@GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
