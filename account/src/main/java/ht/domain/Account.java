@@ -55,16 +55,17 @@ public class Account {
 
         /** Example 2:  finding and process
         
-        repository().findById(paymentApproved.get???()).ifPresent(account->{
+        
+        */
+        repository().findById(paymentApproved.getId()).ifPresent(account->{
             
-            account // do something
+            account.setBalance(account.getBalance() - paymentApproved.getAmount()); // do something
             repository().save(account);
 
             AccountUpdated accountUpdated = new AccountUpdated(account);
             accountUpdated.publishAfterCommit();
 
          });
-        */
 
     }
     //>>> Clean Arch / Port Method

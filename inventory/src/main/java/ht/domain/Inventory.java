@@ -48,6 +48,14 @@ public class Inventory {
 
     //<<< Clean Arch / Port Method
     public static void decreaseInventory(OrderPlaced orderPlaced) {
+
+        repository().findById(Long.valueOf(orderPlaced.getProductId())).ifPresent(inventory->{
+            if (inventory.getStock() >= orderPlaced.getQty()){
+                inventory.setStock(inventory.getStock() - orderPlaced.getQty()); // do something
+                repository().save(inventory);
+            }
+
+         });
         //implement business logic here:
 
         /** Example 1:  new item 
@@ -80,6 +88,14 @@ public class Inventory {
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void increaseInventory(OrderCanceled orderCanceled) {
+
+        repository().findById(Long.valueOf(orderCanceled.getProductId())).ifPresent(inventory->{
+            
+            inventory.setStock(inventory.getStock() + orderCanceled.getQty()); // do something
+            repository().save(inventory);
+
+
+         });
         //implement business logic here:
 
         /** Example 1:  new item 

@@ -35,8 +35,26 @@ public class PolicyHandler {
             "\n\n##### listener DecreaseInventory : " + orderPlaced + "\n\n"
         );
 
-        // Sample Logic //
-        Inventory.decreaseInventory(event);
+        // 재고 감소 로직
+        inventoryRepository.findByProductId(event.getProductId()).ifPresent(inventory -> {
+            inventory.setStock(inventory.getStock() - event.getQty());
+            inventoryRepository.save(inventory);
+        
+            // 재고가 0 이하인 경우 OutOfStock 이벤트 발생
+            if (inventory.getStock() <= 0) {
+                OutOfStock outOfStock = new OutOfStock();
+                outOfStock.setId(inventory.getId());
+                outOfStock.setName(inventory.getName());
+                outOfStock.setStock(inventory.getStock());
+                outOfStock.publish();
+
+                System.out.println(
+                    "\n\n##### OutOfStock Event Published : " + outOfStock + "\n\n"
+                );
+            }
+        });
+
+        // Inventory.decreaseInventory(event);
     }
 
     @StreamListener(
@@ -51,8 +69,14 @@ public class PolicyHandler {
             "\n\n##### listener IncreaseInventory : " + orderCanceled + "\n\n"
         );
 
+         // 재고 증가 로직 실행
+         inventoryRepository.findByProductId(event.getProductId()).ifPresent(inventory -> {
+            inventory.setStock(inventory.getStock() + event.getQty());
+            inventoryRepository.save(inventory);
+        });
+
         // Sample Logic //
-        Inventory.increaseInventory(event);
+        // Inventory.increaseInventory(event);
     }
 }
 //>>> Clean Arch / Inbound Adaptor
