@@ -70,9 +70,6 @@
                     { text: "accountId", value: "accountId" },
                     { text: "balance", value: "balance" },
                     { text: "customerId", value: "customerId" },
-                    { text: "accountId", value: "accountId" },
-                    { text: "balance", value: "balance" },
-                    { text: "customerId", value: "customerId" },
                 ],
             account : [],
             newValue: {},
@@ -90,9 +87,6 @@
             this.values = temp.data._embedded.accounts;
 
             this.newValue = {
-                'accountId': '',
-                'balance': 0,
-                'customerId': '',
                 'accountId': '',
                 'balance': 0,
                 'customerId': '',

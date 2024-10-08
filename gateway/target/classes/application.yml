@@ -32,7 +32,7 @@ spring:
         - id: account
           uri: http://localhost:8087
           predicates:
-            - Path=/accounts/**, /undefined/**, /undefined/**, /undefined/**, 
+            - Path=/accounts/**, 
         - id: frontend
           uri: http://localhost:8080
           predicates:
@@ -80,7 +80,7 @@ spring:
         - id: account
           uri: http://account:8080
           predicates:
-            - Path=/accounts/**, /undefined/**, /undefined/**, /undefined/**, 
+            - Path=/accounts/**, 
         - id: frontend
           uri: http://frontend:8080
           predicates:

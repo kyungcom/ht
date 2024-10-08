@@ -108,10 +108,6 @@
                 'orderId': '',
                 'amount': 0,
                 'status': false,
-                'paymentId': '',
-                'orderId': '',
-                'amount': 0,
-                'status': false,
             }
         },
         methods:{

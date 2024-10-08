@@ -71,10 +71,6 @@
                     { text: "orderId", value: "orderId" },
                     { text: "amount", value: "amount" },
                     { text: "status", value: "status" },
-                    { text: "paymentId", value: "paymentId" },
-                    { text: "orderId", value: "orderId" },
-                    { text: "amount", value: "amount" },
-                    { text: "status", value: "status" },
                 ],
             payment : [],
             newValue: {},
@@ -92,10 +88,6 @@
             this.values = temp.data._embedded.payments;
 
             this.newValue = {
-                'paymentId': '',
-                'orderId': '',
-                'amount': 0,
-                'status': false,
                 'paymentId': '',
                 'orderId': '',
                 'amount': 0,

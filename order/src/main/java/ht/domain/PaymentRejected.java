@@ -10,4 +10,8 @@ import lombok.*;
 public class PaymentRejected extends AbstractEvent {
 
     private Long id;
+    private String paymentId;
+    private String orderId;
+    private Integer amount;
+    private Boolean status;
 }

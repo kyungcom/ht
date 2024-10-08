@@ -107,9 +107,6 @@
                 'accountId': '',
                 'balance': 0,
                 'customerId': '',
-                'accountId': '',
-                'balance': 0,
-                'customerId': '',
             }
         },
         methods:{

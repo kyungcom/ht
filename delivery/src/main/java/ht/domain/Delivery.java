@@ -74,7 +74,7 @@ public class Delivery {
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
-    public static void cancelDelivery(InventoryIncreased inventoryIncreased) {
+    public static void cancelDelivery(OrderCanceled orderCanceled) {
         //implement business logic here:
 
         /** Example 1:  new item 
@@ -87,7 +87,7 @@ public class Delivery {
 
         /** Example 2:  finding and process
         
-        repository().findById(inventoryIncreased.get???()).ifPresent(delivery->{
+        repository().findById(orderCanceled.get???()).ifPresent(delivery->{
             
             delivery // do something
             repository().save(delivery);

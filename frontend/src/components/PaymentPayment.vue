@@ -20,10 +20,6 @@
             <String label="OrderId" v-model="value.orderId" :editMode="editMode" :inputUI="''"/>
             <Number label="Amount" v-model="value.amount" :editMode="editMode" :inputUI="''"/>
             <Boolean label="Status" v-model="value.status" :editMode="editMode" :inputUI="''"/>
-            <String label="PaymentId" v-model="value.paymentId" :editMode="editMode" :inputUI="''"/>
-            <String label="OrderId" v-model="value.orderId" :editMode="editMode" :inputUI="''"/>
-            <Number label="Amount" v-model="value.amount" :editMode="editMode" :inputUI="''"/>
-            <Boolean label="Status" v-model="value.status" :editMode="editMode" :inputUI="''"/>
         </v-card-text>
 
         <v-card-actions style="background-color: white;">
