@@ -70,14 +70,12 @@
 
 
 ### 부적격 이벤트 탈락
-![image](https://user-images.githubusercontent.com/15603058/119298594-4f837c00-bc98-11eb-9f67-ec2e882e1f33.png)
+![image](https://private-user-images.githubusercontent.com/77838744/374384245-e6d4ee13-1315-43c5-8681-eee94b8d8faf.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjgzNTQ0MzcsIm5iZiI6MTcyODM1NDEzNywicGF0aCI6Ii83NzgzODc0NC8zNzQzODQyNDUtZTZkNGVlMTMtMTMxNS00M2M1LTg2ODEtZWVlOTRiOGQ4ZmFmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEwMDglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMDA4VDAyMjIxN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTFiNThkOGM3NTJlMzZkZDZkZGVlYjVjZTA5NDYzNWZlYmZkMzYzNDQ5M2MwMDdkYjQxYjgzNDEzZmYxNDU2Y2QmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.1P4qZwzXp8eAb1pz5pH1igT5pBy9nj54AId_AGhzsiQ)
 
-    - 과정중 도출된 잘못된 도메인 이벤트들을 걸러내는 작업을 수행함
-        - 등록시>RoomSearched, 예약시>RoomSelected :  UI 의 이벤트이지, 업무적인 의미의 이벤트가 아니라서 제외
 
 ### 완성된 1차 모형
 
-![image](https://user-images.githubusercontent.com/15603058/119305002-0edd3000-bca3-11eb-9cc0-1ba8b17f2432.png)
+![image](https://github.com/kyungcom/ht/issues/2)
 
     - View Model 추가
 
