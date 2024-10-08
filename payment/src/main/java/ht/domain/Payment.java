@@ -27,14 +27,6 @@ public class Payment {
 
     private Boolean status;
 
-    private String paymentId;
-
-    private String orderId;
-
-    private Integer amount;
-
-    private Boolean status;
-
     @PostPersist
     public void onPostPersist() {
         PaymentApproved paymentApproved = new PaymentApproved(this);

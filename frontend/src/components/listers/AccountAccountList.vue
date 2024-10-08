@@ -44,16 +44,10 @@
                             
                             
                             
-                            
-                            
-                            
                         </v-list-item-title>
 
                         <v-list-item-subtitle style="font-size:25px; font-weight:700;">
                             [ Id :  {{data.id }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ AccountId :  {{data.accountId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ Balance :  {{data.balance }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ CustomerId :  {{data.customerId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ AccountId :  {{data.accountId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ Balance :  {{data.balance }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ CustomerId :  {{data.customerId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -124,9 +118,6 @@
             this.values = temp.data._embedded.accounts;
             
             this.newValue = {
-                'accountId': '',
-                'balance': 0,
-                'customerId': '',
                 'accountId': '',
                 'balance': 0,
                 'customerId': '',

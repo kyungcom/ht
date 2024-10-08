@@ -25,12 +25,6 @@ public class Account {
 
     private String customerId;
 
-    private String accountId;
-
-    private Integer balance;
-
-    private String customerId;
-
     @PostPersist
     public void onPostPersist() {
         AccountCreated accountCreated = new AccountCreated(this);
