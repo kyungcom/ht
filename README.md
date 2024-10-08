@@ -24,8 +24,6 @@ See the README.md files inside the each microservices directory:
 - dashboard
 - order
 - delivery
-- cancelled event
-- deadline
 - payment
 - account
 
@@ -51,18 +49,6 @@ mvn spring-boot:run
 - delivery
 ```
  http :8088/deliveries id="id" orderId="orderId" productId="productId" address="address" qty="qty" status="status" 
-```
-- cancelled event
-```
-```
-- deadline
-```
- http :8088/deadlines id="id" deadline="deadline" orderId="orderId" startedTime="startedTime" 
- http :8088/ 
- http :8088/ 
- http :8088/ 
- http :8088/ 
- http :8088/ 
 ```
 - payment
 ```

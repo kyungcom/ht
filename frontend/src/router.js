@@ -15,20 +15,6 @@ import OrderOrderDetail from "./components/listers/OrderOrderDetail"
 import DeliveryDeliveryManager from "./components/listers/DeliveryDeliveryCards"
 import DeliveryDeliveryDetail from "./components/listers/DeliveryDeliveryDetail"
 
-
-import DeadlineDeadlineManager from "./components/listers/DeadlineDeadlineCards"
-import DeadlineDeadlineDetail from "./components/listers/DeadlineDeadlineDetail"
-import Manager from "./components/listers/Cards"
-import Detail from "./components/listers/Detail"
-import Manager from "./components/listers/Cards"
-import Detail from "./components/listers/Detail"
-import Manager from "./components/listers/Cards"
-import Detail from "./components/listers/Detail"
-import Manager from "./components/listers/Cards"
-import Detail from "./components/listers/Detail"
-import Manager from "./components/listers/Cards"
-import Detail from "./components/listers/Detail"
-
 import PaymentPaymentManager from "./components/listers/PaymentPaymentCards"
 import PaymentPaymentDetail from "./components/listers/PaymentPaymentDetail"
 
@@ -78,68 +64,6 @@ export default new Router({
                 path: '/deliveries/deliveries/:id',
                 name: 'DeliveryDeliveryDetail',
                 component: DeliveryDeliveryDetail
-            },
-
-
-            {
-                path: '/deadlines/deadlines',
-                name: 'DeadlineDeadlineManager',
-                component: DeadlineDeadlineManager
-            },
-            {
-                path: '/deadlines/deadlines/:id',
-                name: 'DeadlineDeadlineDetail',
-                component: DeadlineDeadlineDetail
-            },
-            {
-                path: '//',
-                name: 'Manager',
-                component: Manager
-            },
-            {
-                path: '///:id',
-                name: 'Detail',
-                component: Detail
-            },
-            {
-                path: '//',
-                name: 'Manager',
-                component: Manager
-            },
-            {
-                path: '///:id',
-                name: 'Detail',
-                component: Detail
-            },
-            {
-                path: '//',
-                name: 'Manager',
-                component: Manager
-            },
-            {
-                path: '///:id',
-                name: 'Detail',
-                component: Detail
-            },
-            {
-                path: '//',
-                name: 'Manager',
-                component: Manager
-            },
-            {
-                path: '///:id',
-                name: 'Detail',
-                component: Detail
-            },
-            {
-                path: '//',
-                name: 'Manager',
-                component: Manager
-            },
-            {
-                path: '///:id',
-                name: 'Detail',
-                component: Detail
             },
 
             {

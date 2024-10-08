@@ -79,34 +79,6 @@ services:
       - ./delivery:/usr/src
       - ./maven-repo:/root/.m2
       
-  cancelled event:
-    depends_on: 
-      - kafka
-    image: adoptopenjdk/maven-openjdk11:latest
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    command: mvn spring-boot:run
-    ports:
-      - 8086:8086
-    working_dir: /usr/src
-    volumes:
-      - ./cancelled event:/usr/src
-      - ./maven-repo:/root/.m2
-      
-  deadline:
-    depends_on: 
-      - kafka
-    image: adoptopenjdk/maven-openjdk11:latest
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    command: mvn spring-boot:run
-    ports:
-      - 8087:8087
-    working_dir: /usr/src
-    volumes:
-      - ./deadline:/usr/src
-      - ./maven-repo:/root/.m2
-      
   payment:
     depends_on: 
       - kafka
@@ -115,7 +87,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     command: mvn spring-boot:run
     ports:
-      - 0:0
+      - 8086:8086
     working_dir: /usr/src
     volumes:
       - ./payment:/usr/src
@@ -129,7 +101,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     command: mvn spring-boot:run
     ports:
-      - 0:0
+      - 8087:8087
     working_dir: /usr/src
     volumes:
       - ./account:/usr/src

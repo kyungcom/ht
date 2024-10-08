@@ -1,6 +1,8 @@
 package ht.domain;
 
 import ht.PaymentApplication;
+import ht.domain.PaymentApproved;
+import ht.domain.PaymentRejected;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +34,15 @@ public class Payment {
     private Integer amount;
 
     private Boolean status;
+
+    @PostPersist
+    public void onPostPersist() {
+        PaymentApproved paymentApproved = new PaymentApproved(this);
+        paymentApproved.publishAfterCommit();
+
+        PaymentRejected paymentRejected = new PaymentRejected(this);
+        paymentRejected.publishAfterCommit();
+    }
 
     public static PaymentRepository repository() {
         PaymentRepository paymentRepository = PaymentApplication.applicationContext.getBean(

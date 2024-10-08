@@ -1,6 +1,8 @@
 package ht.domain;
 
 import ht.AccountApplication;
+import ht.domain.AccountCreated;
+import ht.domain.AccountUpdated;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +30,15 @@ public class Account {
     private Integer balance;
 
     private String customerId;
+
+    @PostPersist
+    public void onPostPersist() {
+        AccountCreated accountCreated = new AccountCreated(this);
+        accountCreated.publishAfterCommit();
+
+        AccountUpdated accountUpdated = new AccountUpdated(this);
+        accountUpdated.publishAfterCommit();
+    }
 
     public static AccountRepository repository() {
         AccountRepository accountRepository = AccountApplication.applicationContext.getBean(
