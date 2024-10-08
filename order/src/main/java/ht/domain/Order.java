@@ -1,7 +1,6 @@
 package ht.domain;
 
 import ht.domain.OrderPlaced;
-import ht.external.ListItemService;
 import ht.domain.OrderCanceled;
 import ht.OrderApplication;
 import javax.persistence.*;
@@ -14,26 +13,58 @@ import java.time.LocalDate;
 @Entity
 @Table(name="Order_table")
 @Data
+
 //<<< DDD / Aggregate Root
 public class Order  {
+
+
+    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-
+    
+    
+    
+    
     private Long id;
+    
+    
+    
+    
     private String productId;
+    
+    
+    
+    
     private String customerId;
+    
+    
+    
+    
     private Integer qty;
+    
+    
+    
+    
     private String status;
+    
+    
+    
+    
     private String address;
 
     @PostPersist
     public void onPostPersist(){
 
+
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
 
+
+
         OrderCanceled orderCanceled = new OrderCanceled(this);
-        orderCanceled.publishAfterCommit();    
+        orderCanceled.publishAfterCommit();
+
+    
     }
 
     public static OrderRepository repository(){
@@ -41,19 +72,21 @@ public class Order  {
         return orderRepository;
     }
 
-    public void inventory(){
-        // ht.external.InventoryQuery inventoryQuery = new ht.external.InventoryQuery();
-        // OrderApplication.applicationContext
-        //     .getBean(ht.external.Service.class)
-        //     .( inventoryQuery);
-    }
 
-    // public void listItem(ListItemCommand listItemCommand){ // 원래 코드 syntax 에러로 인해 일단 변경
-    public void listItem(ListItemService listItemCommand){
-    // ht.external.ListItemQuery listItemQuery = new ht.external.ListItemQuery();
-        // OrderApplication.applicationContext
-        //     .getBean(ht.external.InventoryService.class)
-        //     .listItem( listItemQuery);
+
+    public void inventory(){
+        ht.external.InventoryQuery inventoryQuery = new ht.external.InventoryQuery();
+        OrderApplication.applicationContext
+            .getBean(ht.external.Service.class)
+            .( inventoryQuery);
+    }
+    
+    
+    public void listItem(ListItemCommand listItemCommand){
+        ht.external.ListItemQuery listItemQuery = new ht.external.ListItemQuery();
+        OrderApplication.applicationContext
+            .getBean(ht.external.InventoryService.class)
+            .listItem( listItemQuery);
     }
     
 
@@ -79,6 +112,7 @@ public class Order  {
          });
         */
 
+        
     }
 //>>> Clean Arch / Port Method
 //<<< Clean Arch / Port Method
