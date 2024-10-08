@@ -57,9 +57,6 @@ mvn spring-boot:run
 - account
 ```
  http :8088/accounts id="id" accountId="accountId" balance="balance" customerId="customerId" accountId="accountId" balance="balance" customerId="customerId" 
- http :8088/ 
- http :8088/ 
- http :8088/ 
 ```
 
 

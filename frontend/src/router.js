@@ -20,12 +20,6 @@ import PaymentPaymentDetail from "./components/listers/PaymentPaymentDetail"
 
 import AccountAccountManager from "./components/listers/AccountAccountCards"
 import AccountAccountDetail from "./components/listers/AccountAccountDetail"
-import Manager from "./components/listers/Cards"
-import Detail from "./components/listers/Detail"
-import Manager from "./components/listers/Cards"
-import Detail from "./components/listers/Detail"
-import Manager from "./components/listers/Cards"
-import Detail from "./components/listers/Detail"
 
 
 export default new Router({
@@ -86,36 +80,6 @@ export default new Router({
                 path: '/accounts/accounts/:id',
                 name: 'AccountAccountDetail',
                 component: AccountAccountDetail
-            },
-            {
-                path: '//',
-                name: 'Manager',
-                component: Manager
-            },
-            {
-                path: '///:id',
-                name: 'Detail',
-                component: Detail
-            },
-            {
-                path: '//',
-                name: 'Manager',
-                component: Manager
-            },
-            {
-                path: '///:id',
-                name: 'Detail',
-                component: Detail
-            },
-            {
-                path: '//',
-                name: 'Manager',
-                component: Manager
-            },
-            {
-                path: '///:id',
-                name: 'Detail',
-                component: Detail
             },
 
 
