@@ -52,14 +52,6 @@ pluralCaseList.push( {plural: "orders/orders", pascal: "OrderOrder"} )
 
 pluralCaseList.push( {plural: "deliveries/deliveries", pascal: "DeliveryDelivery"} )
 
-
-pluralCaseList.push( {plural: "deadlines/deadlines", pascal: "DeadlineDeadline"} )
-pluralCaseList.push( {plural: "/", pascal: ""} )
-pluralCaseList.push( {plural: "/", pascal: ""} )
-pluralCaseList.push( {plural: "/", pascal: ""} )
-pluralCaseList.push( {plural: "/", pascal: ""} )
-pluralCaseList.push( {plural: "/", pascal: ""} )
-
 pluralCaseList.push( {plural: "payments/payments", pascal: "PaymentPayment"} )
 
 pluralCaseList.push( {plural: "accounts/accounts", pascal: "AccountAccount"} )

@@ -25,20 +25,12 @@ spring:
           uri: http://localhost:8085
           predicates:
             - Path=/deliveries/**, 
-        - id: cancelled event
-          uri: http://localhost:8086
-          predicates:
-            - Path=, 
-        - id: deadline
-          uri: http://localhost:8087
-          predicates:
-            - Path=/deadlines/**, /undefined/**, /undefined/**, /undefined/**, /undefined/**, /undefined/**, 
         - id: payment
-          uri: http://localhost:0
+          uri: http://localhost:8086
           predicates:
             - Path=/payments/**, 
         - id: account
-          uri: http://localhost:0
+          uri: http://localhost:8087
           predicates:
             - Path=/accounts/**, /undefined/**, /undefined/**, /undefined/**, 
         - id: frontend
@@ -81,14 +73,6 @@ spring:
           uri: http://delivery:8080
           predicates:
             - Path=/deliveries/**, 
-        - id: cancelled event
-          uri: http://cancelledEvent:8080
-          predicates:
-            - Path=, 
-        - id: deadline
-          uri: http://deadline:8080
-          predicates:
-            - Path=/deadlines/**, /undefined/**, /undefined/**, /undefined/**, /undefined/**, /undefined/**, 
         - id: payment
           uri: http://payment:8080
           predicates:

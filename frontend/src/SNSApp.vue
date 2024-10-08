@@ -71,74 +71,6 @@
                     </v-list-item>
 
 
-
-                    <v-list-item
-                        class="px-2"
-                        key="deadlines"
-                        to="/deadlines/deadlines"
-                        @click="changeUrl()"
-                        color="primary"
-                        style="font-weight:700;"
-                    >
-                        Deadline
-                    </v-list-item>
-
-                    <v-list-item
-                        class="px-2"
-                        key=""
-                        to="//"
-                        @click="changeUrl()"
-                        color="primary"
-                        style="font-weight:700;"
-                    >
-                        
-                    </v-list-item>
-
-                    <v-list-item
-                        class="px-2"
-                        key=""
-                        to="//"
-                        @click="changeUrl()"
-                        color="primary"
-                        style="font-weight:700;"
-                    >
-                        
-                    </v-list-item>
-
-                    <v-list-item
-                        class="px-2"
-                        key=""
-                        to="//"
-                        @click="changeUrl()"
-                        color="primary"
-                        style="font-weight:700;"
-                    >
-                        
-                    </v-list-item>
-
-                    <v-list-item
-                        class="px-2"
-                        key=""
-                        to="//"
-                        @click="changeUrl()"
-                        color="primary"
-                        style="font-weight:700;"
-                    >
-                        
-                    </v-list-item>
-
-                    <v-list-item
-                        class="px-2"
-                        key=""
-                        to="//"
-                        @click="changeUrl()"
-                        color="primary"
-                        style="font-weight:700;"
-                    >
-                        
-                    </v-list-item>
-
-
                     <v-list-item
                         class="px-2"
                         key="payments"
@@ -293,48 +225,6 @@ export default {
                 description: '', 
                 key: 'deliveries', 
                 route: '/deliveries/deliveries',
-                ImageUrl: '',
-            },
-            { 
-                title: 'Deadline', 
-                description: '', 
-                key: 'deadlines', 
-                route: '/deadlines/deadlines',
-                ImageUrl: '',
-            },
-            { 
-                title: '', 
-                description: '', 
-                key: '', 
-                route: '//',
-                ImageUrl: '',
-            },
-            { 
-                title: '', 
-                description: '', 
-                key: '', 
-                route: '//',
-                ImageUrl: '',
-            },
-            { 
-                title: '', 
-                description: '', 
-                key: '', 
-                route: '//',
-                ImageUrl: '',
-            },
-            { 
-                title: '', 
-                description: '', 
-                key: '', 
-                route: '//',
-                ImageUrl: '',
-            },
-            { 
-                title: '', 
-                description: '', 
-                key: '', 
-                route: '//',
                 ImageUrl: '',
             },
             { 

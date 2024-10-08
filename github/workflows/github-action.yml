@@ -33,8 +33,6 @@ jobs:
           mvn clean package -f ./dashboard/pom.xml
           mvn clean package -f ./order/pom.xml
           mvn clean package -f ./delivery/pom.xml
-          mvn clean package -f ./cancelled event/pom.xml
-          mvn clean package -f ./deadline/pom.xml
           mvn clean package -f ./payment/pom.xml
           mvn clean package -f ./account/pom.xml
 
@@ -77,26 +75,6 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}/delivery:latest
             ghcr.io/${{ github.repository }}/delivery:${{ github.ref_name }}
-            
-      - name: Docker Build and push for CancelledEvent
-        uses: docker/build-push-action@v4
-        with:
-          context: ./cancelled event
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            ghcr.io/${{ github.repository }}/cancelled-event:latest
-            ghcr.io/${{ github.repository }}/cancelled-event:${{ github.ref_name }}
-            
-      - name: Docker Build and push for Deadline
-        uses: docker/build-push-action@v4
-        with:
-          context: ./deadline
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            ghcr.io/${{ github.repository }}/deadline:latest
-            ghcr.io/${{ github.repository }}/deadline:${{ github.ref_name }}
             
       - name: Docker Build and push for Payment
         uses: docker/build-push-action@v4
