@@ -46,7 +46,7 @@ public class Delivery {
     }
 
     //<<< Clean Arch / Port Method
-    public static void startDelivery(InventoryDecreased inventoryDecreased) {
+    public static void startDelivery(OrderPlaced orderPlaced) {
         //implement business logic here:
 
         /** Example 1:  new item 
@@ -59,7 +59,7 @@ public class Delivery {
 
         /** Example 2:  finding and process
         
-        repository().findById(inventoryDecreased.get???()).ifPresent(delivery->{
+        repository().findById(orderPlaced.get???()).ifPresent(delivery->{
             
             delivery // do something
             repository().save(delivery);
