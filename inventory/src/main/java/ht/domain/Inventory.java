@@ -54,9 +54,14 @@ public class Inventory {
                 inventory.setStock(inventory.getStock() - orderPlaced.getQty()); // do something
                 repository().save(inventory);
             }
+            InventoryDecreased inventoryDecreased = new InventoryDecreased(inventory);
+            inventoryDecreased.publishAfterCommit();
+
+            OutOfStock outOfStock = new OutOfStock(inventory);
+            outOfStock.publishAfterCommit();
 
          });
-        //implement business logic here:
+        // implement business logic here:
 
         /** Example 1:  new item 
         Inventory inventory = new Inventory();
@@ -94,6 +99,8 @@ public class Inventory {
             inventory.setStock(inventory.getStock() + orderCanceled.getQty()); // do something
             repository().save(inventory);
 
+            InventoryIncreased inventoryIncreased = new InventoryIncreased(inventory);
+            inventoryIncreased.publishAfterCommit();
 
          });
         //implement business logic here:

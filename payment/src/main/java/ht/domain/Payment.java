@@ -45,6 +45,7 @@ public class Payment {
 
     //<<< Clean Arch / Port Method
     public static void initiatePayment(OrderPlaced orderPlaced) {
+        
         //implement business logic here:
 
         /** Example 1:  new item 

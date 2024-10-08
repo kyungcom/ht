@@ -21,35 +21,12 @@ public class Order  {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
+
     private Long id;
-    
-    
-    
-    
     private String productId;
-    
-    
-    
-    
     private String customerId;
-    
-    
-    
-    
     private Integer qty;
-    
-    
-    
-    
     private String status;
-    
-    
-    
-    
     private String address;
 
     @PostPersist
@@ -75,18 +52,18 @@ public class Order  {
 
 
     public void inventory(){
-        ht.external.InventoryQuery inventoryQuery = new ht.external.InventoryQuery();
-        OrderApplication.applicationContext
-            .getBean(ht.external.Service.class)
-            .( inventoryQuery);
+        // ht.external.InventoryQuery inventoryQuery = new ht.external.InventoryQuery();
+        // OrderApplication.applicationContext
+        //     .getBean(ht.external.Service.class)
+        //     .( inventoryQuery);
     }
     
     
     public void listItem(ListItemCommand listItemCommand){
-        ht.external.ListItemQuery listItemQuery = new ht.external.ListItemQuery();
-        OrderApplication.applicationContext
-            .getBean(ht.external.InventoryService.class)
-            .listItem( listItemQuery);
+        // ht.external.ListItemQuery listItemQuery = new ht.external.ListItemQuery();
+        // OrderApplication.applicationContext
+        //     .getBean(ht.external.InventoryService.class)
+        //     .listItem( listItemQuery);
     }
     
 
