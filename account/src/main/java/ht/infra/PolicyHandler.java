@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ht.config.kafka.KafkaProcessor;
 import ht.domain.*;
 import javax.naming.NameParser;
-import javax.naming.NameParser;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -20,6 +19,8 @@ public class PolicyHandler {
     @Autowired
     AccountRepository accountRepository;
 
+    // @Autowired
+    // Repository Repository;
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString) {}
 
