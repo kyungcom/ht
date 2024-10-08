@@ -37,9 +37,6 @@ public class PolicyHandler {
 
         // 재고 감소 로직
         inventoryRepository.findByProductId(event.getProductId()).ifPresent(inventory -> {
-            inventory.setStock(inventory.getStock() - event.getQty());
-            inventoryRepository.save(inventory);
-        
             // 재고가 0 이하인 경우 OutOfStock 이벤트 발생
             if (inventory.getStock() <= 0) {
                 OutOfStock outOfStock = new OutOfStock();
@@ -52,8 +49,11 @@ public class PolicyHandler {
                     "\n\n##### OutOfStock Event Published : " + outOfStock + "\n\n"
                 );
             }
+            else{
+                inventory.setStock(inventory.getStock() - event.getQty());
+                inventoryRepository.save(inventory);
+            }
         });
-
         // Inventory.decreaseInventory(event);
     }
 

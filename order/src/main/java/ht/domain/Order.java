@@ -16,9 +16,6 @@ import java.time.LocalDate;
 
 //<<< DDD / Aggregate Root
 public class Order  {
-
-
-    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 
@@ -31,25 +28,17 @@ public class Order  {
 
     @PostPersist
     public void onPostPersist(){
-
-
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
 
-
-
         OrderCanceled orderCanceled = new OrderCanceled(this);
         orderCanceled.publishAfterCommit();
-
-    
     }
 
     public static OrderRepository repository(){
         OrderRepository orderRepository = OrderApplication.applicationContext.getBean(OrderRepository.class);
         return orderRepository;
     }
-
-
 
     public void inventory(){
         // ht.external.InventoryQuery inventoryQuery = new ht.external.InventoryQuery();
@@ -59,7 +48,8 @@ public class Order  {
     }
     
     
-    public void listItem(ListItemCommand listItemCommand){
+    // public void listItem(ListItemCommand listItemCommand){
+    public void listItem(){
         // ht.external.ListItemQuery listItemQuery = new ht.external.ListItemQuery();
         // OrderApplication.applicationContext
         //     .getBean(ht.external.InventoryService.class)
@@ -69,6 +59,16 @@ public class Order  {
 
 //<<< Clean Arch / Port Method
     public static void updateStatus(OutOfStock outOfStock){
+
+        repository().findById(outOfStock.getOrderId()).ifPresent(order->{
+            
+            order.status = "OutOfStock"; // do something
+            repository().save(order);
+
+            OrderCanceled orderCancelled = new OrderCanceled(order);
+            orderCancelled.publishAfterCommit();
+
+         });
         
         //implement business logic here:
 
@@ -88,12 +88,21 @@ public class Order  {
 
          });
         */
-
-        
     }
+
 //>>> Clean Arch / Port Method
 //<<< Clean Arch / Port Method
     public static void updateStatus(PaymentRejected paymentRejected){
+
+        repository().findById(paymentRejected.getOrderId()).ifPresent(order->{
+            
+            order.status = "PaymentRejected"; // do something
+            repository().save(order);
+
+            OrderCanceled orderCancelled = new OrderCanceled(order);
+            orderCancelled.publishAfterCommit();
+
+         });
         
         //implement business logic here:
 
@@ -112,12 +121,9 @@ public class Order  {
 
 
          });
-        */
-
-        
+        */  
     }
 //>>> Clean Arch / Port Method
-
 
 }
 //>>> DDD / Aggregate Root

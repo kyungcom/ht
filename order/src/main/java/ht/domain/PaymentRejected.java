@@ -11,7 +11,7 @@ public class PaymentRejected extends AbstractEvent {
 
     private Long id;
     private String paymentId;
-    private String orderId;
+    private Long orderId;
     private Integer amount;
     private Boolean status;
 }
