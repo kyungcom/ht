@@ -19,27 +19,27 @@ public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String name;
-
     private Integer stock;
+    private Long orderId;
 
     @PostPersist
     public void onPostPersist() {
+        // InventoryIncreased inventoryIncreased = new InventoryIncreased(this);
+        // inventoryIncreased.publishAfterCommit();
         InventoryDecreased inventoryDecreased = new InventoryDecreased(this);
         inventoryDecreased.publishAfterCommit();
-
-        OutOfStock outOfStock = new OutOfStock(this);
-        outOfStock.publishAfterCommit();
-
-        InventoryIncreased inventoryIncreased = new InventoryIncreased(this);
-        inventoryIncreased.publishAfterCommit();
     }
 
     @PreUpdate
     public void onPreUpdate() {
-        // InventoryIncreased inventoryIncreased = new InventoryIncreased(this);
-        // inventoryIncreased.publishAfterCommit();
+        // InventoryDecreased inventoryDecreased = new InventoryDecreased(this);
+        // inventoryDecreased.publishAfterCommit();
+
+        // OutOfStock outOfStock = new OutOfStock(this);
+        // outOfStock.publishAfterCommit();
+        InventoryIncreased inventoryIncreased = new InventoryIncreased(this);
+        inventoryIncreased.publishAfterCommit();
     }
 
     public static InventoryRepository repository() {
@@ -56,12 +56,14 @@ public class Inventory {
             if (inventory.getStock() >= orderPlaced.getQty()){
                 inventory.setStock(inventory.getStock() - orderPlaced.getQty()); // do something
                 repository().save(inventory);
-            }
-            InventoryDecreased inventoryDecreased = new InventoryDecreased(inventory);
-            inventoryDecreased.publishAfterCommit();
 
-            OutOfStock outOfStock = new OutOfStock(inventory);
-            outOfStock.publishAfterCommit();
+                InventoryDecreased inventoryDecreased = new InventoryDecreased(inventory);
+                inventoryDecreased.publishAfterCommit();
+            } else {
+                OutOfStock outOfStock = new OutOfStock(inventory);
+                outOfStock.setOrderId(orderPlaced.getId()); 
+                outOfStock.publishAfterCommit();
+            }
 
          });
         // implement business logic here:

@@ -12,13 +12,19 @@ import lombok.*;
 public class DeliveryStarted extends AbstractEvent {
 
     private Long id;
-    private String orderId;
-    private String productId;
+    private Long orderId;
+    private Long productId;
     private String address;
-    private String qty;
+    private Integer qty;
 
     public DeliveryStarted(Delivery aggregate) {
         super(aggregate);
+
+        this.id = aggregate.getId();
+        this.orderId = aggregate.getOrderId();
+        this.productId = aggregate.getProductId();
+        this.address = aggregate.getAddress();
+        this.qty = aggregate.getQty();
     }
 
     public DeliveryStarted() {

@@ -8,7 +8,6 @@ import lombok.*;
 @Data
 @ToString
 public class OutOfStock extends AbstractEvent {
-
     private Long id;
     private String name;
     private Integer stock;

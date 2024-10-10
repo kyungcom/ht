@@ -22,6 +22,7 @@ public class OutOfStock extends AbstractEvent {
         this.id = aggregate.getId();
         this.name = aggregate.getName();
         this.stock = aggregate.getStock();
+        this.orderId = aggregate.getOrderId();
     }
 
     public OutOfStock() {

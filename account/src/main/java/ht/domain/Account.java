@@ -29,9 +29,6 @@ public class Account {
     public void onPostPersist() {
         AccountCreated accountCreated = new AccountCreated(this);
         accountCreated.publishAfterCommit();
-
-        AccountUpdated accountUpdated = new AccountUpdated(this);
-        accountUpdated.publishAfterCommit();
     }
 
     public static AccountRepository repository() {

@@ -18,24 +18,16 @@ public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String address;
-
-    private String qty;
-
+    private Integer qty;
     private String status;
-
     private Long orderId;
-
     private Long productId;
 
     @PostPersist
     public void onPostPersist() {
         DeliveryStarted deliveryStarted = new DeliveryStarted(this);
         deliveryStarted.publishAfterCommit();
-
-        DeliveryCancelled deliveryCancelled = new DeliveryCancelled(this);
-        deliveryCancelled.publishAfterCommit();
     }
 
     public static DeliveryRepository repository() {
@@ -48,23 +40,12 @@ public class Delivery {
     //<<< Clean Arch / Port Method
     public static void startDelivery(OrderPlaced orderPlaced) {
 
-        repository().findById(orderPlaced.getId()).ifPresent(delivery->{
-            
-            repository().save(delivery);
-
-            DeliveryStarted deliveryStarted = new DeliveryStarted(delivery);
-            deliveryStarted.publishAfterCommit();
-
-         });
-        //implement business logic here:
-
-        /** Example 1:  new item 
         Delivery delivery = new Delivery();
         repository().save(delivery);
 
         DeliveryStarted deliveryStarted = new DeliveryStarted(delivery);
         deliveryStarted.publishAfterCommit();
-        */
+        //implement business logic here:
 
         /** Example 2:  finding and process
         
@@ -84,6 +65,14 @@ public class Delivery {
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void cancelDelivery(OrderCanceled orderCanceled) {
+        repository().findById(orderCanceled.getId()).ifPresent(delivery->{
+            
+            repository().save(delivery);
+
+            DeliveryCancelled deliveryCancelled = new DeliveryCancelled(delivery);
+            deliveryCancelled.publishAfterCommit();
+
+         });
         //implement business logic here:
 
         /** Example 1:  new item 
@@ -106,7 +95,6 @@ public class Delivery {
 
          });
         */
-
     }
     //>>> Clean Arch / Port Method
 

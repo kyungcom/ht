@@ -31,9 +31,6 @@ public class Payment {
     public void onPostPersist() {
         PaymentApproved paymentApproved = new PaymentApproved(this);
         paymentApproved.publishAfterCommit();
-
-        PaymentRejected paymentRejected = new PaymentRejected(this);
-        paymentRejected.publishAfterCommit();
     }
 
     public static PaymentRepository repository() {

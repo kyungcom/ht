@@ -29,7 +29,7 @@ public class PolicyHandler {
     public void wheneverOutOfStock_UpdateStatus(
         @Payload OutOfStock outOfStock
     ) {
-        // OutOfStock event = outOfStock;
+        OutOfStock event = outOfStock;
         System.out.println(
             "\n\n##### listener UpdateStatus : " + outOfStock + "\n\n"
         );
@@ -39,6 +39,7 @@ public class PolicyHandler {
         //     order.setStatus("OutOfStock");
         //     orderRepository.save(order);
         // });
+                                                                                                                
     }
 
     @StreamListener(
@@ -48,7 +49,7 @@ public class PolicyHandler {
     public void wheneverPaymentRejected_UpdateStatus(
         @Payload PaymentRejected paymentRejected
     ) {
-        // PaymentRejected event = paymentRejected;
+        PaymentRejected event = paymentRejected;
         System.out.println(
             "\n\n##### listener UpdateStatus : " + paymentRejected + "\n\n"
         );

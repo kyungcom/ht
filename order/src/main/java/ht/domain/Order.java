@@ -20,8 +20,8 @@ public class Order  {
     @GeneratedValue(strategy=GenerationType.AUTO)
 
     private Long id;
-    private String productId;
-    private String customerId;
+    private Long productId;
+    private Long customerId;
     private Integer qty;
     private String status;
     private String address;
@@ -31,9 +31,12 @@ public class Order  {
     public void onPostPersist(){
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
+    }
 
-        OrderCanceled orderCanceled = new OrderCanceled(this);
-        orderCanceled.publishAfterCommit();
+    @PreRemove
+    public void onPreRemove() {
+        OrderCanceled orderCancelled = new OrderCanceled(this);
+        orderCancelled.publishAfterCommit();
     }
 
     public static OrderRepository repository(){
@@ -63,12 +66,12 @@ public class Order  {
 
         repository().findById(outOfStock.getOrderId()).ifPresent(order->{
             
-            order.status = "OutOfStock"; // do something
+            order.setStatus("OrderCanceled");
             repository().save(order);
 
-            // OrderCanceled orderCancelled = new OrderCanceled(order);
-            // orderCancelled.publishAfterCommit();
-
+            OrderCanceled orderCancelled = new OrderCanceled(order);
+            orderCancelled.publishAfterCommit();
+            
          });
         
         //implement business logic here:
