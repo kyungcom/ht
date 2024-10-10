@@ -117,7 +117,7 @@
             
             this.newValue = {
                 'balance': 0,
-                'customerId': '',
+                'customerId': 0,
             }
         },
         methods: {

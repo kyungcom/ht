@@ -21,7 +21,7 @@ public class Account {
 
     private Integer balance;
 
-    private String customerId;
+    private Long customerId;
 
     @PostPersist
     public void onPostPersist() {
