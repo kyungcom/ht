@@ -46,16 +46,16 @@ public class Payment {
     //<<< Clean Arch / Port Method
     public static void initiatePayment(OrderPlaced orderPlaced) {
         repository().findById(orderPlaced.getId()).ifPresent(payment -> {
-            
-            payment.setAmount(orderPlaced.getQty() * 100);
-            
+
+            int price = orderPlaced.getQty() * orderPlaced.getPrice();
+            payment.setAmount(price);
             repository().save(payment);
 
-            if (payment.getAmount() > 0) {
-                payment.setStatus(true); // Payment is approved
+            try {
+               payment.setStatus(true); // Payment is approved
                PaymentApproved paymentApproved = new PaymentApproved(payment);
                paymentApproved.publishAfterCommit();
-            } else {
+            } catch(Exception e) {
                payment.setStatus(false); // Payment is rejected
                PaymentRejected paymentRejected = new PaymentRejected(payment);
                paymentRejected.publishAfterCommit();

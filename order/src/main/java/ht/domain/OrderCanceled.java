@@ -26,6 +26,8 @@ public class OrderCanceled extends AbstractEvent {
         this.customerId = aggregate.getCustomerId();
         this.qty = aggregate.getQty();
         this.status = aggregate.getStatus();
+        this.address = aggregate.getAddress();
+        this.price = aggregate.getPrice();
     }
 
     public OrderCanceled() {

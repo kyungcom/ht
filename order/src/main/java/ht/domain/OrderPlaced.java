@@ -27,7 +27,7 @@ public class OrderPlaced extends AbstractEvent {
         this.qty = aggregate.getQty();
         this.status = aggregate.getStatus();
         this.address = aggregate.getAddress();
-      this.price = aggregate.getPrice();
+        this.price = aggregate.getPrice();
     }
 
     public OrderPlaced() {

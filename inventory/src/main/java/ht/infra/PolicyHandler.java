@@ -30,30 +30,30 @@ public class PolicyHandler {
     public void wheneverOrderPlaced_DecreaseInventory(
         @Payload OrderPlaced orderPlaced
     ) {
-        OrderPlaced event = orderPlaced;
+        // OrderPlaced event = orderPlaced;
         System.out.println(
             "\n\n##### listener DecreaseInventory : " + orderPlaced + "\n\n"
         );
 
         // 재고 감소 로직
-        inventoryRepository.findByProductId(event.getProductId()).ifPresent(inventory -> {
+        // inventoryRepository.findByProductId(event.getProductId()).ifPresent(inventory -> {
             // 재고가 0 이하인 경우 OutOfStock 이벤트 발생
-            if (inventory.getStock() <= 0) {
-                OutOfStock outOfStock = new OutOfStock();
-                outOfStock.setId(inventory.getId());
-                outOfStock.setName(inventory.getName());
-                outOfStock.setStock(inventory.getStock());
-                outOfStock.publish();
+        //     if (inventory.getStock() <= 0) {
+        //         OutOfStock outOfStock = new OutOfStock();
+        //         outOfStock.setId(inventory.getId());
+        //         outOfStock.setName(inventory.getName());
+        //         outOfStock.setStock(inventory.getStock());
+        //         outOfStock.publish();
 
-                System.out.println(
-                    "\n\n##### OutOfStock Event Published : " + outOfStock + "\n\n"
-                );
-            }
-            else{
-                inventory.setStock(inventory.getStock() - event.getQty());
-                inventoryRepository.save(inventory);
-            }
-        });
+        //         System.out.println(
+        //             "\n\n##### OutOfStock Event Published : " + outOfStock + "\n\n"
+        //         );
+        //     }
+        //     else{
+        //         inventory.setStock(inventory.getStock() - event.getQty());
+        //         inventoryRepository.save(inventory);
+        //     }
+        // });
         // Inventory.decreaseInventory(event);
     }
 
@@ -64,16 +64,16 @@ public class PolicyHandler {
     public void wheneverOrderCanceled_IncreaseInventory(
         @Payload OrderCanceled orderCanceled
     ) {
-        OrderCanceled event = orderCanceled;
+        // OrderCanceled event = orderCanceled;
         System.out.println(
             "\n\n##### listener IncreaseInventory : " + orderCanceled + "\n\n"
         );
 
          // 재고 증가 로직 실행
-         inventoryRepository.findByProductId(event.getProductId()).ifPresent(inventory -> {
-            inventory.setStock(inventory.getStock() + event.getQty());
-            inventoryRepository.save(inventory);
-        });
+        //  inventoryRepository.findByProductId(event.getProductId()).ifPresent(inventory -> {
+        //     inventory.setStock(inventory.getStock() + event.getQty());
+        //     inventoryRepository.save(inventory);
+        // });
 
         // Sample Logic //
         // Inventory.increaseInventory(event);

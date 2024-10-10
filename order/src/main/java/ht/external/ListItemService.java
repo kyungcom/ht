@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import ht.domain.ListItem;
 
-@FeignClient(name = "inventory", url = "${api.url.inventory}")
+@FeignClient(name = "listitem", url = "${api.url.inventory}")
 public interface ListItemService {
     @GetMapping(path = "/listItems")
     public List<ListItem> getListItem();
