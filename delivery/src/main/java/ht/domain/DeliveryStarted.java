@@ -19,12 +19,6 @@ public class DeliveryStarted extends AbstractEvent {
 
     public DeliveryStarted(Delivery aggregate) {
         super(aggregate);
-
-        this.id = aggregate.getId();
-        this.orderId = aggregate.getOrderId();
-        this.productId = aggregate.getProductId();
-        this.address = aggregate.getAddress();
-        this.qty = aggregate.getQty();
     }
 
     public DeliveryStarted() {

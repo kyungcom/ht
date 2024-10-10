@@ -40,6 +40,16 @@ public class Account {
 
     //<<< Clean Arch / Port Method
     public static void updateAccount(PaymentApproved paymentApproved) {
+
+        repository().findByPaymentId(paymentApproved.getId()).ifPresent(account->{
+            
+            account.setBalance(account.getBalance() - paymentApproved.getAmount()); // do something
+            repository().save(account);
+
+            AccountUpdated accountUpdated = new AccountUpdated(account);
+            accountUpdated.publishAfterCommit();
+        });
+
         //implement business logic here:
 
         /** Example 1:  new item 

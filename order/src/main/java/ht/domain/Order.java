@@ -17,34 +17,18 @@ import java.time.LocalDate;
 //<<< DDD / Aggregate Root
 public class Order  {
 
-
-    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
     private Long id;
     private Long productId;
     private Long customerId;
     private Integer qty;
-    
-    
-    
-    
     private String status;
-    
-    
-    
-    
     private String address;
     private Integer price;
 
     @PostPersist
     public void onPostPersist(){
-
-
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
     }
@@ -62,32 +46,31 @@ public class Order  {
 
 
 
-    public void inventory(){
-        ht.external.InventoryQuery inventoryQuery = new ht.external.InventoryQuery();
-        OrderApplication.applicationContext
-            .getBean(ht.external.Service.class)
-            .( inventoryQuery);
-    }
+    // public void inventory(){
+    //     ht.external.InventoryQuery inventoryQuery = new ht.external.InventoryQuery();
+    //     OrderApplication.applicationContext
+    //         .getBean(ht.external.Service.class)
+    //         .( inventoryQuery);
+    // }
     
     
-    public void listItem(ListItemCommand listItemCommand){
-        ht.external.ListItemQuery listItemQuery = new ht.external.ListItemQuery();
-        OrderApplication.applicationContext
-            .getBean(ht.external.InventoryService.class)
-            .listItem( listItemQuery);
-    }
+    // public void listItem(ListItemCommand listItemCommand){
+    //     ht.external.ListItemQuery listItemQuery = new ht.external.ListItemQuery();
+    //     OrderApplication.applicationContext
+    //         .getBean(ht.external.InventoryService.class)
+    //         .listItem( listItemQuery);
+    // }
     
 
 //<<< Clean Arch / Port Method
     public static void updateStatus(OutOfStock outOfStock){
 
         repository().findById(outOfStock.getOrderId()).ifPresent(order->{
-            
             order.setStatus("OrderCanceled");
             repository().save(order);
 
-            OrderCanceled orderCancelled = new OrderCanceled(order);
-            orderCancelled.publishAfterCommit();
+            OrderCanceled orderCanceled = new OrderCanceled(order);
+            orderCanceled.publishAfterCommit();
             
          });
         
@@ -134,6 +117,15 @@ public class Order  {
 
          });
         */
+        repository().findById(paymentRejected.getOrderId()).ifPresent(order->{
+            
+            order.setStatus("PaymentRejected");
+            repository().save(order);
+
+            OrderCanceled orderCanceled = new OrderCanceled(order);
+            orderCanceled.publishAfterCommit();
+            
+         });
 
         
     }

@@ -15,7 +15,7 @@ public class PaymentRejected extends AbstractEvent {
     private Integer amount;
     private Boolean status;
     private Long orderId;
-    private String customerId;
+    private Long customerId;
 
     public PaymentRejected(Payment aggregate) {
         super(aggregate);

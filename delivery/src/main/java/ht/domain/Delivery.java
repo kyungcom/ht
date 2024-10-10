@@ -24,12 +24,6 @@ public class Delivery {
     private Long orderId;
     private Long productId;
 
-    @PostPersist
-    public void onPostPersist() {
-        DeliveryStarted deliveryStarted = new DeliveryStarted(this);
-        deliveryStarted.publishAfterCommit();
-    }
-
     public static DeliveryRepository repository() {
         DeliveryRepository deliveryRepository = DeliveryApplication.applicationContext.getBean(
             DeliveryRepository.class
@@ -40,6 +34,11 @@ public class Delivery {
     //<<< Clean Arch / Port Method
     public static void startDelivery(OrderPlaced orderPlaced) {
         Delivery delivery = new Delivery();
+        delivery.setAddress(orderPlaced.getAddress());
+        delivery.setOrderId(orderPlaced.getId());
+        delivery.setProductId(orderPlaced.getProductId());
+        delivery.setQty(orderPlaced.getQty());
+        delivery.setStatus("start");
         repository().save(delivery);
 
         DeliveryStarted deliveryStarted = new DeliveryStarted(delivery);
@@ -64,7 +63,9 @@ public class Delivery {
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void cancelDelivery(OrderCanceled orderCanceled) {
-        repository().findById(orderCanceled.getId()).ifPresent(delivery->{
+        repository().findByOrderId(orderCanceled.getId()).ifPresent(delivery->{
+
+            delivery.setStatus("delivery cancelled");
             
             repository().save(delivery);
 

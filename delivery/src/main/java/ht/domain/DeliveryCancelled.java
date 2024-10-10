@@ -19,12 +19,6 @@ public class DeliveryCancelled extends AbstractEvent {
 
     public DeliveryCancelled(Delivery aggregate) {
         super(aggregate);
-        
-        this.id = aggregate.getId();
-        this.orderId = aggregate.getOrderId();
-        this.productId = aggregate.getProductId();
-        this.address = aggregate.getAddress();
-        this.qty = aggregate.getQty();
     }
 
     public DeliveryCancelled() {

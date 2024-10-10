@@ -25,13 +25,13 @@ public class Payment {
 
     private Long orderId;
 
-    private String customerId;
+    private Long customerId;
 
-    @PostPersist
-    public void onPostPersist() {
-        PaymentApproved paymentApproved = new PaymentApproved(this);
-        paymentApproved.publishAfterCommit();
-    }
+    // @PostPersist
+    // public void onPostPersist() {
+    //     PaymentApproved paymentApproved = new PaymentApproved(this);
+    //     paymentApproved.publishAfterCommit();
+    // }
 
     public static PaymentRepository repository() {
         PaymentRepository paymentRepository = PaymentApplication.applicationContext.getBean(
@@ -42,23 +42,23 @@ public class Payment {
 
     //<<< Clean Arch / Port Method
     public static void initiatePayment(OrderPlaced orderPlaced) {
-        repository().findById(orderPlaced.getId()).ifPresent(payment -> {
+        // repository().findById(orderPlaced.getId()).ifPresent(payment -> {
 
-            int price = orderPlaced.getQty() * orderPlaced.getPrice();
-            payment.setAmount(price);
+        //     int price = orderPlaced.getQty() * orderPlaced.getPrice();
+        //     payment.setAmount(price);
 
-            try {
-               payment.setStatus(true); // Payment is approved
-               repository().save(payment);
-               PaymentApproved paymentApproved = new PaymentApproved(payment);
-               paymentApproved.publishAfterCommit();
-            } catch(Exception e) {
-               payment.setStatus(false); // Payment is rejected
-               repository().save(payment);
-               PaymentRejected paymentRejected = new PaymentRejected(payment);
-               paymentRejected.publishAfterCommit();
-            }
-        });
+        //     try {
+        //        payment.setStatus(true); // Payment is approved
+        //        repository().save(payment);
+        //        PaymentApproved paymentApproved = new PaymentApproved(payment);
+        //        paymentApproved.publishAfterCommit();
+        //     } catch(Exception e) {
+        //        payment.setStatus(false); // Payment is rejected
+        //        repository().save(payment);
+        //        PaymentRejected paymentRejected = new PaymentRejected(payment);
+        //        paymentRejected.publishAfterCommit();
+        //     }
+        // });
         //implement business logic here:
 
         /** Example 1:  new item 
@@ -70,6 +70,16 @@ public class Payment {
         PaymentRejected paymentRejected = new PaymentRejected(payment);
         paymentRejected.publishAfterCommit();
         */
+        int price = orderPlaced.getQty() * orderPlaced.getPrice();
+        Payment payment = new Payment();
+        payment.setAmount(price);
+        payment.setCustomerId(orderPlaced.getCustomerId());
+        payment.setOrderId(orderPlaced.getId());
+        payment.setStatus(true);
+        repository().save(payment);
+
+        PaymentApproved paymentApproved = new PaymentApproved(payment);
+        paymentApproved.publishAfterCommit();
 
         /** Example 2:  finding and process
         
