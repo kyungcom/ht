@@ -30,11 +30,14 @@ public class Inventory {
         InventoryDecreased inventoryDecreased = new InventoryDecreased(this);
         inventoryDecreased.publishAfterCommit();
 
-        OutOfStock outOfStock = new OutOfStock(this);
-        outOfStock.publishAfterCommit();
-
         ProductAdded productAdded = new ProductAdded(this);
         productAdded.publishAfterCommit();
+    }
+
+    @PostUpdate
+    public void onPostUpdate() {
+        OutOfStock outOfStock = new OutOfStock(this);
+        outOfStock.publishAfterCommit();
     }
 
     @PreUpdate
