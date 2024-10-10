@@ -13,5 +13,6 @@ public class PaymentApproved extends AbstractEvent {
     private Integer amount;
     private Boolean status;
     private Long orderId;
-    private String customerId;
+    private Long customerId;
+    private Long accountId;
 }

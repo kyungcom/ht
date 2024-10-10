@@ -25,7 +25,9 @@ public class Payment {
 
     private Long orderId;
 
-    private String customerId;
+    private Long customerId;
+
+    private Long accountId;
 
     @PostPersist
     public void onPostPersist() {

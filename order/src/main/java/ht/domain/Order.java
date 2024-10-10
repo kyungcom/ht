@@ -30,12 +30,12 @@ public class Order  {
     
     
     
-    private String productId;
+    private Long productId;
     
     
     
     
-    private String customerId;
+    private Long customerId;
     
     
     
@@ -104,6 +104,8 @@ public class Order  {
         Order order = new Order();
         repository().save(order);
 
+        OrderCanceled orderCanceled = new OrderCanceled(order);
+        orderCanceled.publishAfterCommit();
         */
 
         /** Example 2:  finding and process
@@ -113,6 +115,8 @@ public class Order  {
             order // do something
             repository().save(order);
 
+            OrderCanceled orderCanceled = new OrderCanceled(order);
+            orderCanceled.publishAfterCommit();
 
          });
         */
@@ -129,6 +133,8 @@ public class Order  {
         Order order = new Order();
         repository().save(order);
 
+        OrderCanceled orderCanceled = new OrderCanceled(order);
+        orderCanceled.publishAfterCommit();
         */
 
         /** Example 2:  finding and process
@@ -138,6 +144,8 @@ public class Order  {
             order // do something
             repository().save(order);
 
+            OrderCanceled orderCanceled = new OrderCanceled(order);
+            orderCanceled.publishAfterCommit();
 
          });
         */

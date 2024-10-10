@@ -15,7 +15,10 @@
                 <Number label="OrderId" v-model="item.orderId" :editMode="editMode" @change="change" />
             </div>
             <div>
-                <String label="CustomerId" v-model="item.customerId" :editMode="editMode" @change="change" />
+                <Number label="CustomerId" v-model="item.customerId" :editMode="editMode" @change="change" />
+            </div>
+            <div>
+                <Number label="AccountId" v-model="item.accountId" :editMode="editMode" @change="change" />
             </div>
         </v-card-text>
 

@@ -69,7 +69,6 @@
                     { text: "id", value: "id" },
                     { text: "balance", value: "balance" },
                     { text: "customerId", value: "customerId" },
-                    { text: "paymentId", value: "paymentId" },
                 ],
             account : [],
             newValue: {},
@@ -89,7 +88,6 @@
             this.newValue = {
                 'balance': 0,
                 'customerId': '',
-                'paymentId': 0,
             }
         },
         methods: {

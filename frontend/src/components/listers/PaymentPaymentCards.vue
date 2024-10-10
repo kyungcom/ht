@@ -107,7 +107,8 @@
                 'amount': 0,
                 'status': false,
                 'orderId': 0,
-                'customerId': '',
+                'customerId': 0,
+                'accountId': 0,
             }
         },
         methods:{

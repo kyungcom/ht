@@ -14,7 +14,6 @@ public class AccountUpdated extends AbstractEvent {
     private Long id;
     private Integer balance;
     private String customerId;
-    private Long paymentId;
 
     public AccountUpdated(Account aggregate) {
         super(aggregate);
