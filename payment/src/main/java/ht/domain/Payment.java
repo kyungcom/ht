@@ -45,23 +45,6 @@ public class Payment {
 
     //<<< Clean Arch / Port Method
     public static void initiatePayment(OrderPlaced orderPlaced) {
-        repository().findById(orderPlaced.getId()).ifPresent(payment -> {
-            
-            payment.setAmount(orderPlaced.getQty() * 100);
-            
-            repository().save(payment);
-
-            if (payment.getAmount() > 0) {
-                payment.setStatus(true); // Payment is approved
-               PaymentApproved paymentApproved = new PaymentApproved(payment);
-               paymentApproved.publishAfterCommit();
-            } else {
-               payment.setStatus(false); // Payment is rejected
-               PaymentRejected paymentRejected = new PaymentRejected(payment);
-               paymentRejected.publishAfterCommit();
-            }
-        });
-        
         //implement business logic here:
 
         /** Example 1:  new item 
