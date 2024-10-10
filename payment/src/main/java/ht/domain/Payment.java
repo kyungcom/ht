@@ -47,7 +47,7 @@ public class Payment {
     public static void initiatePayment(OrderPlaced orderPlaced) {
         repository().findById(orderPlaced.getId()).ifPresent(payment -> {
             
-            payment.setAmount(orderPlaced.getQty() * getProductPrice(orderPlaced.getProductId()));
+            payment.setAmount(orderPlaced.getQty() * 100);
             
             repository().save(payment);
 
@@ -89,10 +89,6 @@ public class Payment {
          });
         */
 
-    }
-    private static int getProductPrice(String productId) {
-        Inventory inventory = InventoryService.getInventoryByProductId(productId);
-        return inventory != null ? inventory.getAmount() : 0;
     }
     //>>> Clean Arch / Port Method
 
