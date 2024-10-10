@@ -18,5 +18,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface InventoryRepository
     extends PagingAndSortingRepository<Inventory, Long> {
         // ProductId를 기준으로 Inventory를 조회하는 메서드 추가
-    Optional<Inventory> findByProductId(String productId);
+    Optional<Inventory> findById(String productId);
 }

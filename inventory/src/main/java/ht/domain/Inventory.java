@@ -31,12 +31,15 @@ public class Inventory {
 
         OutOfStock outOfStock = new OutOfStock(this);
         outOfStock.publishAfterCommit();
+
+        InventoryIncreased inventoryIncreased = new InventoryIncreased(this);
+        inventoryIncreased.publishAfterCommit();
     }
 
     @PreUpdate
     public void onPreUpdate() {
-        InventoryIncreased inventoryIncreased = new InventoryIncreased(this);
-        inventoryIncreased.publishAfterCommit();
+        // InventoryIncreased inventoryIncreased = new InventoryIncreased(this);
+        // inventoryIncreased.publishAfterCommit();
     }
 
     public static InventoryRepository repository() {
