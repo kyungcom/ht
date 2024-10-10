@@ -49,14 +49,15 @@ public class Payment {
 
             int price = orderPlaced.getQty() * orderPlaced.getPrice();
             payment.setAmount(price);
-            repository().save(payment);
 
             try {
                payment.setStatus(true); // Payment is approved
+               repository().save(payment);
                PaymentApproved paymentApproved = new PaymentApproved(payment);
                paymentApproved.publishAfterCommit();
             } catch(Exception e) {
                payment.setStatus(false); // Payment is rejected
+               repository().save(payment);
                PaymentRejected paymentRejected = new PaymentRejected(payment);
                paymentRejected.publishAfterCommit();
             }

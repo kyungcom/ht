@@ -30,7 +30,7 @@ public class PolicyHandler {
     public void wheneverOrderPlaced_DecreaseInventory(
         @Payload OrderPlaced orderPlaced
     ) {
-        // OrderPlaced event = orderPlaced;
+        OrderPlaced event = orderPlaced;
         System.out.println(
             "\n\n##### listener DecreaseInventory : " + orderPlaced + "\n\n"
         );
@@ -54,7 +54,7 @@ public class PolicyHandler {
         //         inventoryRepository.save(inventory);
         //     }
         // });
-        // Inventory.decreaseInventory(event);
+        Inventory.decreaseInventory(event);
     }
 
     @StreamListener(
@@ -64,7 +64,7 @@ public class PolicyHandler {
     public void wheneverOrderCanceled_IncreaseInventory(
         @Payload OrderCanceled orderCanceled
     ) {
-        // OrderCanceled event = orderCanceled;
+        OrderCanceled event = orderCanceled;
         System.out.println(
             "\n\n##### listener IncreaseInventory : " + orderCanceled + "\n\n"
         );
@@ -76,7 +76,7 @@ public class PolicyHandler {
         // });
 
         // Sample Logic //
-        // Inventory.increaseInventory(event);
+        Inventory.increaseInventory(event);
     }
 }
 //>>> Clean Arch / Inbound Adaptor

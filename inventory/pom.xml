@@ -11,6 +11,7 @@
 	<groupId>ht</groupId>
 	<artifactId>inventory</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<!-- <version>LASTEST</version> -->
 	<name>inventory</name>
 	<description>Demo project for Spring Boot</description>
 
