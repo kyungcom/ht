@@ -15,13 +15,13 @@
                             <v-list-item-title>
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                AccountId :  {{item.accountId }}
-                            </v-list-item-subtitle>
-                            <v-list-item-subtitle>
                                 Balance :  {{item.balance }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
                                 CustomerId :  {{item.customerId }}
+                            </v-list-item-subtitle>
+                            <v-list-item-subtitle>
+                                PaymentId :  {{item.paymentId }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
 

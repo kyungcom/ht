@@ -16,5 +16,5 @@ public class ListItem {
     private Long id;
 
     private String name;
-    private String stock;
+    private Integer stock;
 }

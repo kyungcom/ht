@@ -44,19 +44,19 @@ mvn spring-boot:run
 ```
 - order
 ```
- http :8088/orders id="id" productId="productId" customerId="customerId" qty="qty" status="status" address="address" 
+ http :8088/orders id="id" productId="productId" customerId="customerId" qty="qty" status="status" address="address" price="price" 
 ```
 - delivery
 ```
- http :8088/deliveries id="id" orderId="orderId" productId="productId" address="address" qty="qty" status="status" 
+ http :8088/deliveries id="id" address="address" qty="qty" status="status" orderId="orderId" productId="productId" 
 ```
 - payment
 ```
- http :8088/payments id="id" paymentId="paymentId" orderId="orderId" amount="amount" status="status" 
+ http :8088/payments id="id" amount="amount" status="status" orderId="orderId" customerId="customerId" 
 ```
 - account
 ```
- http :8088/accounts id="id" accountId="accountId" balance="balance" customerId="customerId" 
+ http :8088/accounts id="id" balance="balance" customerId="customerId" paymentId="paymentId" 
 ```
 
 

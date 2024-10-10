@@ -15,16 +15,16 @@
                             <v-list-item-title>
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                PaymentId :  {{item.paymentId }}
+                                Amount :  {{item.amount }}
+                            </v-list-item-subtitle>
+                            <v-list-item-subtitle>
+                                Status :  {{item.status }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
                                 OrderId :  {{item.orderId }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
-                                Amount :  {{item.amount }}
-                            </v-list-item-subtitle>
-                            <v-list-item-subtitle>
-                                Status :  {{item.status }}
+                                CustomerId :  {{item.customerId }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
 

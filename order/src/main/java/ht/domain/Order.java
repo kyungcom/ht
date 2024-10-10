@@ -51,6 +51,11 @@ public class Order  {
     
     
     private String address;
+    
+    
+    
+    
+    private Integer price;
 
     @PostPersist
     public void onPostPersist(){

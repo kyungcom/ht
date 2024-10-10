@@ -19,11 +19,11 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String accountId;
-
     private Integer balance;
 
     private String customerId;
+
+    private Long paymentId;
 
     @PostPersist
     public void onPostPersist() {

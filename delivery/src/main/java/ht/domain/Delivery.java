@@ -19,15 +19,15 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String orderId;
-
-    private String productId;
-
     private String address;
 
     private String qty;
 
     private String status;
+
+    private Long orderId;
+
+    private Long productId;
 
     @PostPersist
     public void onPostPersist() {

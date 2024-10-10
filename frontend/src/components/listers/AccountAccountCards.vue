@@ -104,9 +104,9 @@
             me.values = temp.data._embedded.accounts;
             
             me.newValue = {
-                'accountId': '',
                 'balance': 0,
                 'customerId': '',
+                'paymentId': 0,
             }
         },
         methods:{
