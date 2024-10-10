@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: inventory
-          image: "username/inventory:latest"
+          image: 9nuj/inventory:241010
           ports:
             - containerPort: 8080
           readinessProbe:

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: delivery
-          image: "username/delivery:latest"
+          image: 9nuj/delivery:latest
           ports:
             - containerPort: 8080
           readinessProbe:
