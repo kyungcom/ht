@@ -16,11 +16,11 @@
         </v-card-title >        
 
         <v-card-text style="background-color: white;">
-            <String label="OrderId" v-model="value.orderId" :editMode="editMode" :inputUI="''"/>
-            <String label="ProductId" v-model="value.productId" :editMode="editMode" :inputUI="''"/>
             <String label="Address" v-model="value.address" :editMode="editMode" :inputUI="''"/>
             <String label="Qty" v-model="value.qty" :editMode="editMode" :inputUI="''"/>
             <String label="Status" v-model="value.status" :editMode="editMode" :inputUI="''"/>
+            <Number label="OrderId" v-model="value.orderId" :editMode="editMode" :inputUI="''"/>
+            <Number label="ProductId" v-model="value.productId" :editMode="editMode" :inputUI="''"/>
         </v-card-text>
 
         <v-card-actions style="background-color: white;">

@@ -109,6 +109,7 @@
                 'qty': 0,
                 'status': '',
                 'address': '',
+                'price': 0,
             }
         },
         methods:{

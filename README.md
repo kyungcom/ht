@@ -813,7 +813,9 @@ kubectl delete hpa room -n airbnb
 
 - seige 로 배포작업 직전에 워크로드를 모니터링 함.
 ```
+ http :8088/orders id="id" productId="productId" customerId="customerId" qty="qty" status="status" address="address" price="price" 
 siege -c100 -t60S -r10 -v --content-type "application/json" 'http://room:8080/rooms POST {"desc": "Beautiful House3"}'
+```
 
 ** SIEGE 4.0.4
 ** Preparing 1 concurrent users for battle.
@@ -827,18 +829,21 @@ HTTP/1.1 201     0.02 secs:     260 bytes ==> POST http://room:8080/rooms
 HTTP/1.1 201     0.01 secs:     260 bytes ==> POST http://room:8080/rooms
 HTTP/1.1 201     0.01 secs:     260 bytes ==> POST http://room:8080/rooms
 
-```
 
 - 새버전으로의 배포 시작
 ```
+ http :8088/deliveries id="id" address="address" qty="qty" status="status" orderId="orderId" productId="productId" 
+
 kubectl set image ...
+
 ```
 
 - seige 의 화면으로 넘어가서 Availability 가 100% 미만으로 떨어졌는지 확인
 
 ```
+ http :8088/payments id="id" amount="amount" status="status" orderId="orderId" customerId="customerId" 
 siege -c100 -t60S -r10 -v --content-type "application/json" 'http://room:8080/rooms POST {"desc": "Beautiful House3"}'
-
+```
 
 Transactions:                   7732 hits
 Availability:                  87.32 %
@@ -853,10 +858,12 @@ Failed transactions:            1123
 Longest transaction:            0.94
 Shortest transaction:           0.00
 
-```
 - 배포기간중 Availability 가 평소 100%에서 87% 대로 떨어지는 것을 확인. 원인은 쿠버네티스가 성급하게 새로 올려진 서비스를 READY 상태로 인식하여 서비스 유입을 진행한 것이기 때문. 이를 막기위해 Readiness Probe 를 설정함
 
 ```
+
+ http :8088/accounts id="id" balance="balance" customerId="customerId" paymentId="paymentId" 
+
 # deployment.yaml 의 readiness probe 의 설정:
 ```
 
@@ -867,7 +874,7 @@ kubectl apply -f kubernetes/deployment.yml
 ```
 
 - 동일한 시나리오로 재배포 한 후 Availability 확인:
-```
+
 Lifting the server siege...
 Transactions:                  27657 hits
 Availability:                 100.00 %

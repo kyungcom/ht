@@ -12,9 +12,9 @@ import lombok.*;
 public class AccountUpdated extends AbstractEvent {
 
     private Long id;
-    private String accountId;
     private Integer balance;
     private String customerId;
+    private Long paymentId;
 
     public AccountUpdated(Account aggregate) {
         super(aggregate);
