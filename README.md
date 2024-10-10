@@ -52,11 +52,11 @@ mvn spring-boot:run
 ```
 - payment
 ```
- http :8088/payments id="id" amount="amount" status="status" orderId="orderId" customerId="customerId" 
+ http :8088/payments id="id" amount="amount" status="status" orderId="orderId" customerId="customerId" accountId="accountId" 
 ```
 - account
 ```
- http :8088/accounts id="id" balance="balance" customerId="customerId" paymentId="paymentId" 
+ http :8088/accounts id="id" balance="balance" customerId="customerId" 
 ```
 
 

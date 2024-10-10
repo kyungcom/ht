@@ -23,8 +23,6 @@ public class Account {
 
     private String customerId;
 
-    private Long paymentId;
-
     @PostPersist
     public void onPostPersist() {
         AccountCreated accountCreated = new AccountCreated(this);

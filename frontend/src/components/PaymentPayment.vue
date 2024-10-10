@@ -19,7 +19,8 @@
             <Number label="Amount" v-model="value.amount" :editMode="editMode" :inputUI="''"/>
             <Boolean label="Status" v-model="value.status" :editMode="editMode" :inputUI="''"/>
             <Number label="OrderId" v-model="value.orderId" :editMode="editMode" :inputUI="''"/>
-            <String label="CustomerId" v-model="value.customerId" :editMode="editMode" :inputUI="''"/>
+            <Number label="CustomerId" v-model="value.customerId" :editMode="editMode" :inputUI="''"/>
+            <Number label="AccountId" v-model="value.accountId" :editMode="editMode" :inputUI="''"/>
         </v-card-text>
 
         <v-card-actions style="background-color: white;">

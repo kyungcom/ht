@@ -27,6 +27,8 @@ public class Payment {
 
     private Long customerId;
 
+    private Long accountId;
+
     // @PostPersist
     // public void onPostPersist() {
     //     PaymentApproved paymentApproved = new PaymentApproved(this);

@@ -16,6 +16,7 @@ public class PaymentApproved extends AbstractEvent {
     private Boolean status;
     private Long orderId;
     private Long customerId;
+    private Long accountId;
 
     public PaymentApproved(Payment aggregate) {
         super(aggregate);

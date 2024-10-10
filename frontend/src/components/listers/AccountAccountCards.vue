@@ -106,7 +106,6 @@
             me.newValue = {
                 'balance': 0,
                 'customerId': '',
-                'paymentId': 0,
             }
         },
         methods:{

@@ -18,7 +18,6 @@
         <v-card-text style="background-color: white;">
             <Number label="Balance" v-model="value.balance" :editMode="editMode" :inputUI="''"/>
             <String label="CustomerId" v-model="value.customerId" :editMode="editMode" :inputUI="''"/>
-            <Number label="PaymentId" v-model="value.paymentId" :editMode="editMode" :inputUI="''"/>
         </v-card-text>
 
         <v-card-actions style="background-color: white;">

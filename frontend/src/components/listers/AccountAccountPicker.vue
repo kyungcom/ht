@@ -20,9 +20,6 @@
                             <v-list-item-subtitle>
                                 CustomerId :  {{item.customerId }}
                             </v-list-item-subtitle>
-                            <v-list-item-subtitle>
-                                PaymentId :  {{item.paymentId }}
-                            </v-list-item-subtitle>
                         </v-list-item-content>
 
                         <v-list-item-action>
@@ -74,8 +71,6 @@
                 if(val != undefined) {
                     var arr = this.list[val]._links.self.href.split('/');
                     obj['id'] = arr[4]; 
-                    
-                    
                     
                     
                     
