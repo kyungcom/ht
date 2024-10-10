@@ -17,6 +17,10 @@ public class InventoryIncreased extends AbstractEvent {
 
     public InventoryIncreased(Inventory aggregate) {
         super(aggregate);
+        
+        this.id = aggregate.getId();
+        this.name = aggregate.getName();
+        this.stock = aggregate.getStock();
     }
 
     public InventoryIncreased() {

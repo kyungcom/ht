@@ -48,7 +48,20 @@ public class Inventory {
 
     //<<< Clean Arch / Port Method
     public static void decreaseInventory(OrderPlaced orderPlaced) {
-        //implement business logic here:
+
+        repository().findById(Long.valueOf(orderPlaced.getProductId())).ifPresent(inventory->{
+            if (inventory.getStock() >= orderPlaced.getQty()){
+                inventory.setStock(inventory.getStock() - orderPlaced.getQty()); // do something
+                repository().save(inventory);
+            }
+            InventoryDecreased inventoryDecreased = new InventoryDecreased(inventory);
+            inventoryDecreased.publishAfterCommit();
+
+            OutOfStock outOfStock = new OutOfStock(inventory);
+            outOfStock.publishAfterCommit();
+
+         });
+        // implement business logic here:
 
         /** Example 1:  new item 
         Inventory inventory = new Inventory();
@@ -80,6 +93,16 @@ public class Inventory {
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void increaseInventory(OrderCanceled orderCanceled) {
+
+        repository().findById(Long.valueOf(orderCanceled.getProductId())).ifPresent(inventory->{
+            
+            inventory.setStock(inventory.getStock() + orderCanceled.getQty()); // do something
+            repository().save(inventory);
+
+            InventoryIncreased inventoryIncreased = new InventoryIncreased(inventory);
+            inventoryIncreased.publishAfterCommit();
+
+         });
         //implement business logic here:
 
         /** Example 1:  new item 

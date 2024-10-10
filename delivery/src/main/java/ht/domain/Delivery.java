@@ -47,6 +47,15 @@ public class Delivery {
 
     //<<< Clean Arch / Port Method
     public static void startDelivery(OrderPlaced orderPlaced) {
+
+        repository().findById(orderPlaced.getId()).ifPresent(delivery->{
+            
+            repository().save(delivery);
+
+            DeliveryStarted deliveryStarted = new DeliveryStarted(delivery);
+            deliveryStarted.publishAfterCommit();
+
+         });
         //implement business logic here:
 
         /** Example 1:  new item 
