@@ -66,8 +66,8 @@ public class Order  {
             order.status = "OutOfStock"; // do something
             repository().save(order);
 
-            OrderCanceled orderCancelled = new OrderCanceled(order);
-            orderCancelled.publishAfterCommit();
+            // OrderCanceled orderCancelled = new OrderCanceled(order);
+            // orderCancelled.publishAfterCommit();
 
          });
         
