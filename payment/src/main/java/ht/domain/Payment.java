@@ -78,6 +78,7 @@ public class Payment {
         payment.setCustomerId(orderPlaced.getCustomerId());
         payment.setOrderId(orderPlaced.getId());
         payment.setStatus(true);
+        payment.setAccountId(1L);
         repository().save(payment);
 
         PaymentApproved paymentApproved = new PaymentApproved(payment);

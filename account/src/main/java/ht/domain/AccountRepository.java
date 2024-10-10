@@ -8,5 +8,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "accounts", path = "accounts")
 public interface AccountRepository
     extends PagingAndSortingRepository<Account, Long> {
-        Account findByPaymentId(Long paymentId);
     }

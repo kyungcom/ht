@@ -21,10 +21,10 @@ public class Account {
 
     private Integer balance;
 
-    private String customerId;
+    private Long customerId;
 
     @PostPersist
-    public void onPostPersist() {
+    public void onPostPersist(){
         AccountCreated accountCreated = new AccountCreated(this);
         accountCreated.publishAfterCommit();
     }
@@ -39,7 +39,7 @@ public class Account {
     //<<< Clean Arch / Port Method
     public static void updateAccount(PaymentApproved paymentApproved) {
 
-        repository().findByPaymentId(paymentApproved.getId()).ifPresent(account->{
+        repository().findById(1L).ifPresent(account->{
             
             account.setBalance(account.getBalance() - paymentApproved.getAmount()); // do something
             repository().save(account);

@@ -64,6 +64,7 @@ public class Order  {
 
 //<<< Clean Arch / Port Method
     public static void updateStatus(OutOfStock outOfStock){
+        System.out.println("================ order OutOfStock===============");
 
         repository().findById(outOfStock.getOrderId()).ifPresent(order->{
             order.setStatus("OrderCanceled");
