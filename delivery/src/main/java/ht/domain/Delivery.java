@@ -39,7 +39,6 @@ public class Delivery {
 
     //<<< Clean Arch / Port Method
     public static void startDelivery(OrderPlaced orderPlaced) {
-
         Delivery delivery = new Delivery();
         repository().save(delivery);
 

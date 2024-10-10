@@ -12,8 +12,4 @@ public class OutOfStock extends AbstractEvent {
     private String name;
     private Integer stock;
     private Long orderId;
-
-    public OutOfStock() {
-        super();
-    }
 }

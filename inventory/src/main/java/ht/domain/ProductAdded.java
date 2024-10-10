@@ -9,17 +9,17 @@ import lombok.*;
 //<<< DDD / Domain Event
 @Data
 @ToString
-public class InventoryIncreased extends AbstractEvent {
+public class ProductAdded extends AbstractEvent {
 
     private Long id;
     private String name;
     private Integer stock;
 
-    public InventoryIncreased(Inventory aggregate) {
+    public ProductAdded(Inventory aggregate) {
         super(aggregate);
     }
 
-    public InventoryIncreased() {
+    public ProductAdded() {
         super();
     }
 }

@@ -18,7 +18,7 @@ public class OrderPlaced extends AbstractEvent {
     private String status;
     private String address;
     private Integer price;
- 
+
     public OrderPlaced(Order aggregate) {
         super(aggregate);
         this.id = aggregate.getId();

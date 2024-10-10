@@ -4,6 +4,7 @@ import ht.InventoryApplication;
 import ht.domain.InventoryDecreased;
 import ht.domain.InventoryIncreased;
 import ht.domain.OutOfStock;
+import ht.domain.ProductAdded;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +30,15 @@ public class Inventory {
         // inventoryIncreased.publishAfterCommit();
         InventoryDecreased inventoryDecreased = new InventoryDecreased(this);
         inventoryDecreased.publishAfterCommit();
+
+        ProductAdded productAdded = new ProductAdded(this);
+        productAdded.publishAfterCommit();
+    }
+
+    @PostUpdate
+    public void onPostUpdate() {
+        OutOfStock outOfStock = new OutOfStock(this);
+        outOfStock.publishAfterCommit();
     }
 
     @PreUpdate
@@ -98,16 +108,6 @@ public class Inventory {
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void increaseInventory(OrderCanceled orderCanceled) {
-
-        repository().findById(Long.valueOf(orderCanceled.getProductId())).ifPresent(inventory->{
-            
-            inventory.setStock(inventory.getStock() + orderCanceled.getQty()); // do something
-            repository().save(inventory);
-
-            InventoryIncreased inventoryIncreased = new InventoryIncreased(inventory);
-            inventoryIncreased.publishAfterCommit();
-
-         });
         //implement business logic here:
 
         /** Example 1:  new item 

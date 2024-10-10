@@ -59,7 +59,6 @@ public class Payment {
                paymentRejected.publishAfterCommit();
             }
         });
-        
         //implement business logic here:
 
         /** Example 1:  new item 
