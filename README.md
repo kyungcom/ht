@@ -87,8 +87,6 @@
 
 ### 비기능 요구사항에 대한 검증
 
-![image](https://user-images.githubusercontent.com/15603058/119311800-79df3480-bcac-11eb-9c1b-0382d981f92f.png)
-
 - 고객 주문시 결제처리:  계좌에 잔액 정보가 없는 경우 차감이 결제가 거절되도록 변경해야함
 - 상품 정보 리스트업:  상품 정보를 확인하는 기능은 결제 등의 중요 기능과 연관성이 없기에 API Request 방식 사용
 - 나머지 모든 inter-microservice 트랜잭션: 모든 이벤트에 대해 데이터 일관성의 시점이 크리티컬하지 않은 모든 경우가 대부분이라 판단, Eventual Consistency 를 기본으로 채택함.
