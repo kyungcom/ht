@@ -75,57 +75,11 @@ public class Order  {
             
          });
         
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Order order = new Order();
-        repository().save(order);
-
-        OrderCanceled orderCanceled = new OrderCanceled(order);
-        orderCanceled.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(outOfStock.get???()).ifPresent(order->{
-            
-            order // do something
-            repository().save(order);
-
-            OrderCanceled orderCanceled = new OrderCanceled(order);
-            orderCanceled.publishAfterCommit();
-
-         });
-        */
-
-        
     }
 //>>> Clean Arch / Port Method
 //<<< Clean Arch / Port Method
     public static void updateStatus(PaymentRejected paymentRejected){
         
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Order order = new Order();
-        repository().save(order);
-
-        OrderCanceled orderCanceled = new OrderCanceled(order);
-        orderCanceled.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(paymentRejected.get???()).ifPresent(order->{
-            
-            order // do something
-            repository().save(order);
-
-            OrderCanceled orderCanceled = new OrderCanceled(order);
-            orderCanceled.publishAfterCommit();
-
-         });
-        */
         repository().findById(paymentRejected.getOrderId()).ifPresent(order->{
             
             order.setStatus("PaymentRejected");
@@ -135,7 +89,6 @@ public class Order  {
             orderCanceled.publishAfterCommit();
             
          });
-
         
     }
 //>>> Clean Arch / Port Method

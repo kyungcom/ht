@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: order
-          image: 9nuj/order:241010
+          image: 9nuj/order:20241010
           ports:
             - containerPort: 8080
           readinessProbe:

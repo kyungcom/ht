@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: 9nuj/frontend:241010
+          image: 9nuj/frontend:20241010
           ports:
             - containerPort: 8080
           readinessProbe:

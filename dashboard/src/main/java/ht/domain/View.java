@@ -14,10 +14,10 @@ public class View {
 
     @Id
     //@GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    private Long orderId;
 
-    private String customerId;
-    private String productId;
+    private Long customerId;
+    private Long productId;
     private String qty;
     private String orderStatus;
     private String deliveryStatus;

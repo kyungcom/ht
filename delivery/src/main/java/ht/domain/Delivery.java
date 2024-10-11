@@ -43,20 +43,6 @@ public class Delivery {
 
         DeliveryStarted deliveryStarted = new DeliveryStarted(delivery);
         deliveryStarted.publishAfterCommit();
-        //implement business logic here:
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderPlaced.get???()).ifPresent(delivery->{
-            
-            delivery // do something
-            repository().save(delivery);
-
-            DeliveryStarted deliveryStarted = new DeliveryStarted(delivery);
-            deliveryStarted.publishAfterCommit();
-
-         });
-        */
 
     }
 
@@ -73,28 +59,7 @@ public class Delivery {
             deliveryCancelled.publishAfterCommit();
 
          });
-        //implement business logic here:
 
-        /** Example 1:  new item 
-        Delivery delivery = new Delivery();
-        repository().save(delivery);
-
-        DeliveryCancelled deliveryCancelled = new DeliveryCancelled(delivery);
-        deliveryCancelled.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderCanceled.get???()).ifPresent(delivery->{
-            
-            delivery // do something
-            repository().save(delivery);
-
-            DeliveryCancelled deliveryCancelled = new DeliveryCancelled(delivery);
-            deliveryCancelled.publishAfterCommit();
-
-         });
-        */
     }
     //>>> Clean Arch / Port Method
 

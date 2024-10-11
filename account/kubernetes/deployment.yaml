@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: account
-          image: 9nuj/account:241010
+          image: 9nuj/account:20241010
           ports:
             - containerPort: 8080
           readinessProbe:

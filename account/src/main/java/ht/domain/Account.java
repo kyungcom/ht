@@ -48,29 +48,6 @@ public class Account {
             accountUpdated.publishAfterCommit();
         });
 
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Account account = new Account();
-        repository().save(account);
-
-        AccountUpdated accountUpdated = new AccountUpdated(account);
-        accountUpdated.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(paymentApproved.get???()).ifPresent(account->{
-            
-            account // do something
-            repository().save(account);
-
-            AccountUpdated accountUpdated = new AccountUpdated(account);
-            accountUpdated.publishAfterCommit();
-
-         });
-        */
-
     }
     //>>> Clean Arch / Port Method
 

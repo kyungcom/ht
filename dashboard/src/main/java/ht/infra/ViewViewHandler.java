@@ -27,9 +27,10 @@ public class ViewViewHandler {
             // view 객체 생성
             View view = new View();
             // view 객체에 이벤트의 Value 를 set 함
-            view.setId(orderPlaced.getId());
+            view.setOrderId(orderPlaced.getId());
             view.setCustomerId(orderPlaced.getCustomerId());
             view.setProductId(orderPlaced.getProductId());
+            view.setOrderStatus("ORDER_PLACED");
             view.setQty(String.valueOf(orderPlaced.getQty()));
             // view 레파지 토리에 save
             viewRepository.save(view);
@@ -38,4 +39,24 @@ public class ViewViewHandler {
         }
     }
     //>>> DDD / CQRS
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenDeliveryStarted_then_UPDATE_1(@Payload DeliveryStarted deliveryStarted) {
+        try {
+            if (!deliveryStarted.validate()) return;
+            
+            Optional<View> viewOptional = ViewRepository.findByOrderId(deliveryStarted.getOrderId());
+
+            if (viewOptional.isPresent()) {
+                View view = viewOptional.get();
+                if ("ORDER_PLACED".equals(view.getOrderStatus())) {
+                    view.setDeliveryStatus("DELIVERY_STARTED");
+                    // view 레포지토리에 save
+                    viewRepository.save(view);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

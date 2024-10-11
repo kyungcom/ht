@@ -84,20 +84,6 @@ public class Payment {
         PaymentApproved paymentApproved = new PaymentApproved(payment);
         paymentApproved.publishAfterCommit();
 
-        /** Example 2:  finding and process
-        
-        repository().findById(orderPlaced.get???()).ifPresent(payment->{
-            
-            payment // do something
-            repository().save(payment);
-
-            PaymentApproved paymentApproved = new PaymentApproved(payment);
-            paymentApproved.publishAfterCommit();
-            PaymentRejected paymentRejected = new PaymentRejected(payment);
-            paymentRejected.publishAfterCommit();
-
-         });
-        */
 
     }
     //>>> Clean Arch / Port Method

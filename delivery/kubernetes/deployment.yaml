@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: delivery
-          image: 9nuj/delivery:latest
+          image: 9nuj/delivery:20241010
           ports:
             - containerPort: 8080
           readinessProbe:
