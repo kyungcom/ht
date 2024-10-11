@@ -45,7 +45,7 @@ public class ViewViewHandler {
         try {
             if (!deliveryStarted.validate()) return;
             
-            Optional<View> viewOptional = ViewRepository.findByOrderId(deliveryStarted.getOrderId());
+            Optional<View> viewOptional = viewRepository.findByOrderId(deliveryStarted.getOrderId());
 
             if (viewOptional.isPresent()) {
                 View view = viewOptional.get();
@@ -54,6 +54,42 @@ public class ViewViewHandler {
                     // view 레포지토리에 save
                     viewRepository.save(view);
                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenDeliveryCancelled_then_UPDATE_2(@Payload DeliveryCancelled deliveryCancelled) {
+        try {
+            if (!deliveryCancelled.validate()) return;
+
+            // view 레포지토리에서 해당 주문의 View 객체 조회
+            Optional<View> viewOptional = viewRepository.findByOrderId(deliveryCancelled.getOrderId());
+            if (viewOptional.isPresent()) {
+                View view = viewOptional.get();
+                view.setDeliveryStatus("DELIVERY_CANCELLED");
+                // view 레포지토리에 save
+                viewRepository.save(view);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenOrderCanceled_then_UPDATE_3(@Payload OrderCanceled orderCanceled) {
+        try {
+            if (!orderCanceled.validate()) return;
+
+            // view 레포지토리에서 해당 주문의 View 객체 조회
+            Optional<View> viewOptional = viewRepository.findByOrderId(orderCanceled.getId());
+            if (viewOptional.isPresent()) {
+                View view = viewOptional.get();
+                view.setOrderStatus("ORDER_CANCELLED");
+                // view 레포지토리에 save
+                viewRepository.save(view);
             }
         } catch (Exception e) {
             e.printStackTrace();

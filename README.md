@@ -122,44 +122,106 @@
        
           - application.yaml 예시
             ```
+            server:
+            port: 8088
+
+            ---
+
             spring:
-              profiles: docker
-              cloud:
+            profiles: default
+            cloud:
                 gateway:
-                  routes:
+            #<<< API Gateway / Routes
+                routes:
+                    - id: inventory
+                    uri: http://localhost:8082
+                    predicates:
+                        - Path=/inventories/**, 
+                    - id: dashboard
+                    uri: http://localhost:8083
+                    predicates:
+                        - Path=, 
+                    - id: order
+                    uri: http://localhost:8084
+                    predicates:
+                        - Path=/orders/**, 
+                    - id: delivery
+                    uri: http://localhost:8085
+                    predicates:
+                        - Path=/deliveries/**, 
                     - id: payment
-                      uri: http://payment:8080
-                      predicates:
-                        - Path=/payments/** 
-                    - id: room
-                      uri: http://room:8080
-                      predicates:
-                        - Path=/rooms/**, /reviews/**, /check/**
-                    - id: reservation
-                      uri: http://reservation:8080
-                      predicates:
-                        - Path=/reservations/**
-                    - id: message
-                      uri: http://message:8080
-                      predicates:
-                        - Path=/messages/** 
-                    - id: viewpage
-                      uri: http://viewpage:8080
-                      predicates:
-                        - Path= /roomviews/**
-                  globalcors:
+                    uri: http://localhost:8086
+                    predicates:
+                        - Path=/payments/**, 
+                    - id: account
+                    uri: http://localhost:8087
+                    predicates:
+                        - Path=/accounts/**, 
+                    - id: frontend
+                    uri: http://localhost:8080
+                    predicates:
+                        - Path=/**
+            #>>> API Gateway / Routes
+                globalcors:
                     corsConfigurations:
-                      '[/**]':
+                    '[/**]':
                         allowedOrigins:
-                          - "*"
+                        - "*"
                         allowedMethods:
-                          - "*"
+                        - "*"
                         allowedHeaders:
-                          - "*"
+                        - "*"
+                        allowCredentials: true
+
+
+            ---
+
+            spring:
+            profiles: docker
+            cloud:
+                gateway:
+                routes:
+                    - id: inventory
+                    uri: http://inventory:8080
+                    predicates:
+                        - Path=/inventories/**, 
+                    - id: dashboard
+                    uri: http://dashboard:8080
+                    predicates:
+                        - Path=, 
+                    - id: order
+                    uri: http://order:8080
+                    predicates:
+                        - Path=/orders/**, 
+                    - id: delivery
+                    uri: http://delivery:8080
+                    predicates:
+                        - Path=/deliveries/**, 
+                    - id: payment
+                    uri: http://payment:8080
+                    predicates:
+                        - Path=/payments/**, 
+                    - id: account
+                    uri: http://account:8080
+                    predicates:
+                        - Path=/accounts/**, 
+                    - id: frontend
+                    uri: http://frontend:8080
+                    predicates:
+                        - Path=/**
+                globalcors:
+                    corsConfigurations:
+                    '[/**]':
+                        allowedOrigins:
+                        - "*"
+                        allowedMethods:
+                        - "*"
+                        allowedHeaders:
+                        - "*"
                         allowCredentials: true
 
             server:
-              port: 8080            
+            port: 8080
             ```
 
          
@@ -171,25 +233,25 @@
             apiVersion: apps/v1
             kind: Deployment
             metadata:
-              name: gateway
-              namespace: airbnb
-              labels:
+            name: gateway
+            labels:
                 app: gateway
             spec:
-              replicas: 1
-              selector:
+            replicas: 1
+            selector:
                 matchLabels:
-                  app: gateway
-              template:
+                app: gateway
+            template:
                 metadata:
-                  labels:
+                labels:
                     app: gateway
                 spec:
-                  containers:
+                containers:
                     - name: gateway
-                      image: 247785678011.dkr.ecr.us-east-2.amazonaws.com/gateway:1.0
-                      ports:
+                    image: 9nuj/gateway:20241010
+                    ports:
                         - containerPort: 8080
+
             ```               
             
 
@@ -199,7 +261,6 @@
             ```     
           - Kubernetes에 생성된 Deploy. 확인
             
-![image](https://user-images.githubusercontent.com/80744273/119321943-1d821200-bcb8-11eb-98d7-bf8def9ebf80.png)
 	    
             
       3. Kubernetes용 Service.yaml을 작성하고 Kubernetes에 Service/LoadBalancer을 생성하여 Gateway 엔드포인트를 확인함. 
@@ -207,20 +268,18 @@
           
             ```
             apiVersion: v1
-              kind: Service
-              metadata:
-                name: gateway
-                namespace: airbnb
-                labels:
-                  app: gateway
-              spec:
-                ports:
-                  - port: 8080
-                    targetPort: 8080
-                selector:
-                  app: gateway
-                type:
-                  LoadBalancer           
+            kind: Service
+            metadata:
+            name: gateway
+            labels:
+                app: gateway
+            spec:
+            ports:
+                - port: 8080
+                targetPort: 8080
+            selector:
+                app: gateway
+            type: LoadBalancer         
             ```             
 
            
@@ -234,7 +293,7 @@
            
             ```
             Service  및 엔드포인트 확인 
-            kubectl get svc -n airbnb           
+            kubectl get svc -n gateway           
             ```                 
 ![image](https://user-images.githubusercontent.com/80744273/119318358-2a046b80-bcb4-11eb-9d46-ef2d498c2cff.png)
 
