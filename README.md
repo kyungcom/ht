@@ -105,16 +105,17 @@
 ## CQRS
 
 주문(Order) 의 주문id, 수량, 제품id, orderStatus 등 주문 정보에 대하여 고객(Customer)이 조회 할 수 있도록 CQRS 로 구현하였다.
-- room, review, reservation, payment 개별 Aggregate Status 를 통합 조회하여 성능 Issue 를 사전에 예방할 수 있다.
+- order, delivery 개별 Aggregate Status 를 조회
 - 비동기식으로 처리되어 발행된 이벤트 기반 Kafka 를 통해 수신/처리 되어 별도 Table 에 관리한다
-- Table 모델링 (ROOMVIEW)
 
-  ![image](https://user-images.githubusercontent.com/77129832/119319352-4b198c00-bcb5-11eb-93bc-ff0657feeb9f.png)
-- viewpage MSA ViewHandler 를 통해 구현 ("RoomRegistered" 이벤트 발생 시, Pub/Sub 기반으로 별도 Roomview 테이블에 저장)
-  ![image](https://user-images.githubusercontent.com/77129832/119321162-4d7ce580-bcb7-11eb-9030-29ee6272c40d.png)
-  ![image](https://user-images.githubusercontent.com/31723044/119350185-fccab400-bcd9-11eb-8269-61868de41cc7.png)
-- 실제로 view 페이지를 조회해 보면 모든 room에 대한 전반적인 예약 상태, 결제 상태, 리뷰 건수 등의 정보를 종합적으로 알 수 있다
-  ![image](https://user-images.githubusercontent.com/31723044/119357063-1b34ad80-bce2-11eb-94fb-a587261ab56f.png)
+    orderId - 주문ID, type:Long
+    customerId - 고객ID, type:Long
+    productId - 상품ID, type:Long
+    qty - 주문 수량, type:String
+    orderStatus - 주문 상태, type:String
+    deliveryStatus - 배송 상태, type:String
+
+- ViewViewHandler 를 통해 구현 ("OrderPlaced" 이벤트 발생 시, Pub/Sub 기반으로 별도 테이블에 저장)
 
 
 ## API 게이트웨이
@@ -324,194 +325,6 @@ Airbnb 프로젝트에서는 PolicyHandler에서 처리 시 어떤 건에 대한
 ![image](https://user-images.githubusercontent.com/31723044/119320747-dcd5c900-bcb6-11eb-9c44-fd3781c7c55f.png)
 취소 후 - 결제 상태
 ![image](https://user-images.githubusercontent.com/31723044/119320806-ee1ed580-bcb6-11eb-8ccf-8c81385cc8ba.png)
-
-
-## DDD 의 적용
-
-- 각 서비스내에 도출된 핵심 Aggregate Root 객체를 Entity 로 선언하였다. (예시는 room 마이크로 서비스). 이때 가능한 현업에서 사용하는 언어 (유비쿼터스 랭귀지)를 그대로 사용하려고 노력했다. 현실에서 발생가는한 이벤트에 의하여 마이크로 서비스들이 상호 작용하기 좋은 모델링으로 구현을 하였다.
-
-```
-package airbnb;
-
-import javax.persistence.*;
-import org.springframework.beans.BeanUtils;
-
-@Entity
-@Table(name="Room_table")
-public class Room {
-
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long roomId;       // 방ID
-    private String status;     // 방 상태
-    private String desc;       // 방 상세 설명
-    private Long reviewCnt;    // 리뷰 건수
-    private String lastAction; // 최종 작업
-
-    public Long getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(Long roomId) {
-        this.roomId = roomId;
-    }
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-    public Long getReviewCnt() {
-        return reviewCnt;
-    }
-
-    public void setReviewCnt(Long reviewCnt) {
-        this.reviewCnt = reviewCnt;
-    }
-    public String getLastAction() {
-        return lastAction;
-    }
-
-    public void setLastAction(String lastAction) {
-        this.lastAction = lastAction;
-    }
-}
-
-```
-- Entity Pattern 과 Repository Pattern 을 적용하여 JPA 를 통하여 다양한 데이터소스 유형 (RDB or NoSQL) 에 대한 별도의 처리가 없도록 데이터 접근 어댑터를 자동 생성하기 위하여 Spring Data REST 의 RestRepository 를 적용하였다
-```
-package airbnb;
-
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-
-@RepositoryRestResource(collectionResourceRel="rooms", path="rooms")
-public interface RoomRepository extends PagingAndSortingRepository<Room, Long>{
-
-}
-```
-- 적용 후 REST API 의 테스트
-```
-# room 서비스의 room 등록
-http POST http://localhost:8088/rooms desc="Beautiful House"  
-
-# reservation 서비스의 예약 요청
-http POST http://localhost:8088/reservations roomId=1 status=reqReserve
-
-# reservation 서비스의 예약 상태 확인
-http GET http://localhost:8088/reservations
-
-```
-
-## 동기식 호출(Sync) 과 Fallback 처리
-
-분석 단계에서의 조건 중 하나로 예약 시 숙소(room) 간의 예약 가능 상태 확인 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리하기로 하였다. 호출 프로토콜은 이미 앞서 Rest Repository 에 의해 노출되어있는 REST 서비스를 FeignClient 를 이용하여 호출하도록 한다. 또한 예약(reservation) -> 결제(payment) 서비스도 동기식으로 처리하기로 하였다.
-
-- 룸, 결제 서비스를 호출하기 위하여 Stub과 (FeignClient) 를 이용하여 Service 대행 인터페이스 (Proxy) 를 구현 
-
-```
-# PaymentService.java
-
-package airbnb.external;
-
-<import문 생략>
-
-@FeignClient(name="Payment", url="${prop.room.url}")
-public interface PaymentService {
-
-    @RequestMapping(method= RequestMethod.POST, path="/payments")
-    public void approvePayment(@RequestBody Payment payment);
-
-}
-
-# RoomService.java
-
-package airbnb.external;
-
-<import문 생략>
-
-@FeignClient(name="Room", url="${prop.room.url}")
-public interface RoomService {
-
-    @RequestMapping(method= RequestMethod.GET, path="/check/chkAndReqReserve")
-    public boolean chkAndReqReserve(@RequestParam("roomId") long roomId);
-
-}
-
-
-```
-
-- 예약 요청을 받은 직후(@PostPersist) 가능상태 확인 및 결제를 동기(Sync)로 요청하도록 처리
-```
-# Reservation.java (Entity)
-
-    @PostPersist
-    public void onPostPersist(){
-
-        ////////////////////////////////
-        // RESERVATION에 INSERT 된 경우 
-        ////////////////////////////////
-
-        ////////////////////////////////////
-        // 예약 요청(reqReserve) 들어온 경우
-        ////////////////////////////////////
-
-        // 해당 ROOM이 Available한 상태인지 체크
-        boolean result = ReservationApplication.applicationContext.getBean(airbnb.external.RoomService.class)
-                        .chkAndReqReserve(this.getRoomId());
-        System.out.println("######## Check Result : " + result);
-
-        if(result) { 
-
-            // 예약 가능한 상태인 경우(Available)
-
-            //////////////////////////////
-            // PAYMENT 결제 진행 (POST방식) - SYNC 호출
-            //////////////////////////////
-            airbnb.external.Payment payment = new airbnb.external.Payment();
-            payment.setRsvId(this.getRsvId());
-            payment.setRoomId(this.getRoomId());
-            payment.setStatus("paid");
-            ReservationApplication.applicationContext.getBean(airbnb.external.PaymentService.class)
-                .approvePayment(payment);
-
-            /////////////////////////////////////
-            // 이벤트 발행 --> ReservationCreated
-            /////////////////////////////////////
-            ReservationCreated reservationCreated = new ReservationCreated();
-            BeanUtils.copyProperties(this, reservationCreated);
-            reservationCreated.publishAfterCommit();
-        }
-    }
-```
-
-- 동기식 호출에서는 호출 시간에 따른 타임 커플링이 발생하며, 결제 시스템이 장애가 나면 주문도 못받는다는 것을 확인:
-
-
-```
-# 결제 (pay) 서비스를 잠시 내려놓음 (ctrl+c)
-
-# 예약 요청
-http POST http://localhost:8088/reservations roomId=1 status=reqReserve   #Fail
-
-# 결제서비스 재기동
-cd payment
-mvn spring-boot:run
-
-# 예약 요청
-http POST http://localhost:8088/reservations roomId=1 status=reqReserve   #Success
-```
-
-- 또한 과도한 요청시에 서비스 장애가 도미노 처럼 벌어질 수 있다. (서킷브레이커, 폴백 처리는 운영단계에서 설명한다.)
-
 
 
 
